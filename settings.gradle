@@ -1,1 +1,1 @@
-include ':common', ':myapplication'
+include ':app', ':latten_annotations', ':latte_compiler'
