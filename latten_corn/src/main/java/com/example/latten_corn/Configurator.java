@@ -14,10 +14,8 @@ public class Configurator {
         return LATTE_CONFIGS;
     }
 
-    Configurator() {
-
+    public Configurator() {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
-
     }
 
     private static class ViewHolder {
@@ -26,7 +24,7 @@ public class Configurator {
 
     }
 
-    static Configurator getInstance() {
+    public static Configurator getInstance() {
         return ViewHolder.INSTANCE;
     }
 
@@ -41,15 +39,15 @@ public class Configurator {
         return this;
     }
 
-    private void checkConfiguration(){
-        final  boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());
-        if (!isReady){
-            throw  new RuntimeException("Configuration is not ready , call configure");
+    private void checkConfiguration() {
+        final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());
+        if (!isReady) {
+            throw new RuntimeException("Configuration is not ready , call configure");
         }
     }
 
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Enum<ConfigType> key){
+    public final  <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
         return (T) LATTE_CONFIGS.get(key.name());
     }
