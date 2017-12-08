@@ -18,6 +18,9 @@ public class Configurator {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
     }
 
+    /**
+     * 内部类的单例模式
+     */
     private static class ViewHolder {
 
         static final Configurator INSTANCE = new Configurator();
@@ -28,16 +31,19 @@ public class Configurator {
         return ViewHolder.INSTANCE;
     }
 
+    //设置完成
     public final void configure() {
 
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
 
     }
 
+    //添加数据
     public final Configurator withApiHost(String host) {
         LATTE_CONFIGS.put(ConfigType.API_HOST.name(), host);
         return this;
     }
+
 
     private void checkConfiguration() {
         final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());

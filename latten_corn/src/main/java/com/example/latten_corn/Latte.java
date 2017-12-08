@@ -11,6 +11,7 @@ import java.util.WeakHashMap;
 public class Latte {
 
 
+    //得到实例
     public static Configurator init(Context context){
         getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(),context.getApplicationContext());
 

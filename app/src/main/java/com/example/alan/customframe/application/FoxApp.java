@@ -20,6 +20,6 @@ public class FoxApp extends Application {
                 .withApiHost(host)
                 .configure();
 
-        
+
     }
 }
