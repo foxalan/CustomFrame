@@ -31,6 +31,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
+
     annotationProcessor project(':latten_compiler')
     implementation project(':latten_ec')
 }
