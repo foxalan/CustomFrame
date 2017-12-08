@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CustomFrame.iml" filepath="$PROJECT_DIR$/CustomFrame.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/latte_compiler/latte_compiler.iml" filepath="$PROJECT_DIR$/latte_compiler/latte_compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/latten_annotations/latten_annotations.iml" filepath="$PROJECT_DIR$/latten_annotations/latten_annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/latten_compiler/latte_compiler.iml" filepath="$PROJECT_DIR$/latten_compiler/latte_compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/latten_corn/latten_corn.iml" filepath="$PROJECT_DIR$/latten_corn/latten_corn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/latten_ec/latten_ec.iml" filepath="$PROJECT_DIR$/latten_ec/latten_ec.iml" />
     </modules>
   </component>
 </project>

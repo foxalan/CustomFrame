@@ -9,8 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/latte_compiler" />
             <option value="$PROJECT_DIR$/latten_annotations" />
+            <option value="$PROJECT_DIR$/latten_compiler" />
+            <option value="$PROJECT_DIR$/latten_corn" />
+            <option value="$PROJECT_DIR$/latten_ec" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

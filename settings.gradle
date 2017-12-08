@@ -1,1 +1,1 @@
-include ':app', ':latten_annotations', ':latte_compiler'
+include ':app', ':latten_annotations', ':latten_compiler', ':latten_corn', ':latten_ec'
