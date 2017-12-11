@@ -1,6 +1,10 @@
 package com.example.latten_corn;
 
-import java.util.WeakHashMap;
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Alan on 2017/12/8.
@@ -8,9 +12,10 @@ import java.util.WeakHashMap;
 
 public class Configurator {
 
-    private static final WeakHashMap<String, Object> LATTE_CONFIGS = new WeakHashMap<>();
+    private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
-    public final WeakHashMap<String, Object> getLatteConfigs() {
+    public final HashMap<String, Object> getLatteConfigs() {
         return LATTE_CONFIGS;
     }
 
@@ -22,10 +27,19 @@ public class Configurator {
      * 内部类的单例模式
      */
     private static class ViewHolder {
-
         static final Configurator INSTANCE = new Configurator();
-
     }
+
+    //初始化字体图标
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
+    }
+
 
     public static Configurator getInstance() {
         return ViewHolder.INSTANCE;
@@ -33,7 +47,7 @@ public class Configurator {
 
     //设置完成
     public final void configure() {
-
+        initIcons();
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
 
     }
@@ -41,6 +55,12 @@ public class Configurator {
     //添加数据
     public final Configurator withApiHost(String host) {
         LATTE_CONFIGS.put(ConfigType.API_HOST.name(), host);
+        return this;
+    }
+
+    //添加字体图标
+    public final Configurator withIconFont(IconFontDescriptor iconFont) {
+        ICONS.add(iconFont);
         return this;
     }
 
@@ -53,7 +73,7 @@ public class Configurator {
     }
 
     @SuppressWarnings("unchecked")
-    public final  <T> T getConfiguration(Enum<ConfigType> key) {
+    public final <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
         return (T) LATTE_CONFIGS.get(key.name());
     }
