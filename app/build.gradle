@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'android-apt'
+
 
 android {
     compileSdkVersion 26
@@ -32,6 +34,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.1.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor project(':latten_compiler')
-    implementation project(':latten_ec')
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     implementation project(':latten_corn')
+    implementation project(':latten_ec')
 }
