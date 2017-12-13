@@ -35,4 +35,11 @@ dependencies {
     //字体设置
     compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+
+    //volley
+    compile 'com.mcxiaoke.volley:library:1.0.6'
+
+    //OkHttp
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+
 }

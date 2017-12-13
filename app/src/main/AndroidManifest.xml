@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alan.customframe" >
 
+    view plain copy
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>  
+
     <application
         android:name=".application.FoxApp"
         android:allowBackup="true"
