@@ -73,7 +73,7 @@ public class Configurator {
     }
 
     @SuppressWarnings("unchecked")
-    public final <T> T getConfiguration(Enum<ConfigType> key) {
+    public final <T> T getConfiguration(String key) {
         checkConfiguration();
         return (T) LATTE_CONFIGS.get(key.name());
     }

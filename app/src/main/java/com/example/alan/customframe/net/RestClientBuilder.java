@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Created by Alan on 2017/12/14.
  */
 
-public class RetrofitClientBuilder {
+public class RestClientBuilder {
 
     private String url;
     private HashMap<String, Object> params;
@@ -45,7 +45,7 @@ public class RetrofitClientBuilder {
         this.error = error;
     }
 
-    public RetrofitClient build(){
-        return new RetrofitClient(url,params,failure,success,request,error);
+    public RestClient build(){
+        return new RestClient(url,params,failure,success,request,error);
     }
 }

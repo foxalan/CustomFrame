@@ -1,10 +1,10 @@
 package com.example.alan.customframe.net;
 
-import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.ResponseBody;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
@@ -31,6 +31,12 @@ public interface RestService {
     @POST
     Call<String> post(@Url String url, @FieldMap Map<String,Object> params);
 
+    /**
+     * FormUrlEncoded 请求体是一个FORM表单
+     * @param url
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @PUT
     Call<String> put(@Url String url, @FieldMap Map<String,Object> params);
@@ -38,14 +44,27 @@ public interface RestService {
     @DELETE
     Call<String> delete(@Url String url, @QueryMap Map<String,Object> params);
 
+    /**
+     * Streaming表示返回的数据以流的形式返回，不加可能会造成OOM
+     * @param url
+     * @param params
+     * @return
+     */
     @Streaming
     @GET
     Call<ResponseBody> download(@Url String url, @QueryMap Map<String,Object> params);
 
     // to do
+
+    /**
+     * Multipart 表示请求体是一个支持上传的表单
+     * @param url
+     * @param file
+     * @return
+     */
     @Multipart
     @GET
-    Call<String> upload(@Url String url, @Part MultipartBuilder file);
+    Call<String> upload(@Url String url, @Part MultipartBody.Part file);
 
 
 }

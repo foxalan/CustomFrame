@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Created by Alan on 2017/12/14.
  */
 
-public class RetrofitClient {
+public class RestClient {
 
     private final String URL;
     private final HashMap<String,Object> params;
@@ -21,9 +21,9 @@ public class RetrofitClient {
     private final IError ERROR;
 
 
-    public RetrofitClient(String URL, HashMap<String, Object> params,
-                          IFailure FAILURE, ISuccess SUCCESS,
-                          IRequest REQUEST, IError ERROR) {
+    public RestClient(String URL, HashMap<String, Object> params,
+                      IFailure FAILURE, ISuccess SUCCESS,
+                      IRequest REQUEST, IError ERROR) {
         this.URL = URL;
         this.params = params;
         this.FAILURE = FAILURE;
@@ -36,10 +36,10 @@ public class RetrofitClient {
      * 购造单例模式
      */
     private static final class RetrofitHolder{
-        public static final RetrofitClientBuilder BUILDER = new RetrofitClientBuilder();
+        public static final RestClientBuilder BUILDER = new RestClientBuilder();
     }
 
-    public static RetrofitClientBuilder builder(){
+    public static RestClientBuilder builder(){
         return RetrofitHolder.BUILDER;
     }
 
