@@ -8,7 +8,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by Alan on 2017/12/8.
- * 1.其实字体的拓展
+ * 1.关于字体的拓展
  */
 
 public class FoxApp extends Application {
@@ -22,7 +22,7 @@ public class FoxApp extends Application {
     }
 
     private void init() {
-        //初始化基本配置()
+        //初始化基本配置
         Latte.init(this)
                 .withIconFont(new FontAwesomeModule())
                 .withApiHost(host)

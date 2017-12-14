@@ -49,5 +49,11 @@ dependencies {
     // swipeback基于fragmentation, 如果是自定制SupportActivity/Fragment，则参照SwipeBackActivity/Fragment实现即可
     compile 'me.yokeyword:fragmentation-swipeback:1.1.9'
 
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    // Retrofit库
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    // Okhttp库
+
+
 
 }
