@@ -5,5 +5,5 @@ package com.example.alan.customframe.net.callback;
  */
 
 public interface ISuccess {
-    void onSuccess();
+    void onSuccess(String message);
 }

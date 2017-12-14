@@ -10,6 +10,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        RestClient.builder().
+//                setError(new IError() {
+//            @Override
+//            public void onError(int code, String message) {
+//
+//            }
+//        }).setUrl()
+//                .setParams()
+//                .build()
+//                .get();
     }
 
 

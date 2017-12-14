@@ -21,31 +21,37 @@ public class RestClientBuilder {
     private IError error;
 
 
-    public void setUrl(String url) {
+    public RestClientBuilder setUrl(String url) {
         this.url = url;
+        return this;
     }
 
-    public void setParams(HashMap<String, Object> params) {
+    public RestClientBuilder setParams(HashMap<String, Object> params) {
         this.params = params;
+        return this;
     }
 
-    public void setFailure(IFailure failure) {
+    public RestClientBuilder setFailure(IFailure failure) {
         this.failure = failure;
+        return this;
     }
 
-    public void setSuccess(ISuccess success) {
+    public RestClientBuilder setSuccess(ISuccess success) {
         this.success = success;
+        return this;
     }
 
-    public void setRequest(IRequest request) {
+    public RestClientBuilder setRequest(IRequest request) {
         this.request = request;
+        return this;
     }
 
-    public void setError(IError error) {
+    public RestClientBuilder setError(IError error) {
         this.error = error;
+        return this;
     }
 
-    public RestClient build(){
-        return new RestClient(url,params,failure,success,request,error);
+    public RestClient build() {
+        return new RestClient(url, params, failure, success, request, error);
     }
 }

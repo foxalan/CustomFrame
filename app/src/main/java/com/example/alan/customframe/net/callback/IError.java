@@ -6,5 +6,5 @@ package com.example.alan.customframe.net.callback;
 
 public interface IError {
 
-    void onError();
+    void onError(int code ,String message);
 }
