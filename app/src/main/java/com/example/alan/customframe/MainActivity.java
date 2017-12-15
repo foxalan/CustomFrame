@@ -1,26 +1,19 @@
 package com.example.alan.customframe;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.example.alan.customframe.activity.ProxyActivity;
+import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.delegate.TestDelegate;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ProxyActivity {
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-//        RestClient.builder().
-//                setError(new IError() {
-//            @Override
-//            public void onError(int code, String message) {
-//
-//            }
-//        }).setUrl()
-//                .setParams()
-//                .build()
-//                .get();
+    public LatteDelegate setRootDelegate() {
+        return TestDelegate.getInstance();
     }
+
+
 
 
 }

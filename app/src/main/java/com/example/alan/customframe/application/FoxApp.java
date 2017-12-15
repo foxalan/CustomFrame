@@ -13,7 +13,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 public class FoxApp extends Application {
 
-    private String host = "10.202.13.170";
+    private String host = "https://tieba.baidu.com/";
 
     @Override
     public void onCreate() {

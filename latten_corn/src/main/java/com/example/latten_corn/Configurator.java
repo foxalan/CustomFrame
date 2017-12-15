@@ -6,9 +6,7 @@ import com.joanzapata.iconify.Iconify;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Alan on 2017/12/8.
- */
+
 
 public class Configurator {
 
@@ -75,7 +73,7 @@ public class Configurator {
     @SuppressWarnings("unchecked")
     public final <T> T getConfiguration(String key) {
         checkConfiguration();
-        return (T) LATTE_CONFIGS.get(key.name());
+        return (T) LATTE_CONFIGS.get(key);
     }
 
 }

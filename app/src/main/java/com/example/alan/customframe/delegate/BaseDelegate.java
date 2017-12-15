@@ -10,9 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
-/**
- * Created by Alan on 2017/12/12.
- */
+
 
 public abstract class BaseDelegate extends SwipeBackFragment {
 

@@ -1,13 +1,12 @@
 package com.example.alan.customframe.net.callback;
 
 
+import com.example.alan.customframe.loading.LatteLoader;
+import com.example.alan.customframe.loading.LoadingIndicator;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-/**
- * Created by Alan on 2017/12/14.
- */
 
 
 public class RequestCallbacks implements Callback<String> {
@@ -16,12 +15,14 @@ public class RequestCallbacks implements Callback<String> {
     private ISuccess success;
     private IRequest request;
     private IError error;
+    private LoadingIndicator indicator;
 
-    public RequestCallbacks(IFailure failure, ISuccess success, IRequest request, IError error) {
+    public RequestCallbacks(IFailure failure, ISuccess success, IRequest request, IError error,LoadingIndicator indicator) {
         this.failure = failure;
         this.success = success;
         this.request = request;
         this.error = error;
+        this.indicator = indicator;
     }
 
     @Override
@@ -36,10 +37,17 @@ public class RequestCallbacks implements Callback<String> {
             error.onError(response.code(), response.message());
         }
 
+        if (indicator!=null){
+            LatteLoader.stopLoading();
+        }
+
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-
+        failure.IFailure();
+//        if (indicator!=null){
+//            LatteLoader.stopLoading();
+//        }
     }
 }

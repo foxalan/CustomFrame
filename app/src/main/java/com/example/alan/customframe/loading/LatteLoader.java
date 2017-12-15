@@ -2,6 +2,7 @@ package com.example.alan.customframe.loading;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 
 public class LatteLoader {
+    private static final String TAG = "LatteLoader";
 
     private static final int LOADER_SIZE_SCALE = 8;
 
@@ -34,7 +36,10 @@ public class LatteLoader {
             layoutParams.gravity = Gravity.CENTER;
             layoutParams.width = screen_width/LOADER_SIZE_SCALE;
             layoutParams.height = screen_height/LOADER_SIZE_SCALE;
+            window.setAttributes(layoutParams);
+            Log.e(TAG, "showLoading: ");
         }
+
 
         LOADERS.add(dialog);
         dialog.show();

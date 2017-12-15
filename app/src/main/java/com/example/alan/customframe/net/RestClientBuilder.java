@@ -1,5 +1,8 @@
 package com.example.alan.customframe.net;
 
+import android.content.Context;
+
+import com.example.alan.customframe.loading.LoadingIndicator;
 import com.example.alan.customframe.net.callback.IError;
 import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.IRequest;
@@ -19,7 +22,8 @@ public class RestClientBuilder {
     private ISuccess success;
     private IRequest request;
     private IError error;
-
+    private LoadingIndicator indicator;
+    private Context context;
 
     public RestClientBuilder setUrl(String url) {
         this.url = url;
@@ -46,12 +50,18 @@ public class RestClientBuilder {
         return this;
     }
 
+    public RestClientBuilder loader(Context context,LoadingIndicator indicator){
+        this.context = context;
+        this.indicator = indicator;
+        return this;
+    }
+
     public RestClientBuilder setError(IError error) {
         this.error = error;
         return this;
     }
 
     public RestClient build() {
-        return new RestClient(url, params, failure, success, request, error);
+        return new RestClient(url, params, failure, success, request, error,indicator,context);
     }
 }

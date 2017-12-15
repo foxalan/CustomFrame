@@ -1,6 +1,11 @@
 package com.example.alan.customframe.net;
 
 
+import android.content.Context;
+import android.util.Log;
+
+import com.example.alan.customframe.loading.LatteLoader;
+import com.example.alan.customframe.loading.LoadingIndicator;
 import com.example.alan.customframe.net.callback.IError;
 import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.IRequest;
@@ -12,9 +17,6 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-/**
- * Created by Alan on 2017/12/14.
- */
 
 public class RestClient {
 
@@ -24,17 +26,24 @@ public class RestClient {
     private final ISuccess SUCCESS;
     private final IRequest REQUEST;
     private final IError ERROR;
+    private final LoadingIndicator INDICATOR;
+    private final Context CONTEXT;
+
+    private static final String TAG = "RestClient";
 
 
     public RestClient(String URL, HashMap<String, Object> params,
-                      IFailure FAILURE, ISuccess SUCCESS,
-                      IRequest REQUEST, IError ERROR) {
+                      IFailure failure, ISuccess success,
+                      IRequest request, IError error,
+                      LoadingIndicator indicator, Context context) {
         this.URL = URL;
         this.params = params;
-        this.FAILURE = FAILURE;
-        this.SUCCESS = SUCCESS;
-        this.REQUEST = REQUEST;
-        this.ERROR = ERROR;
+        this.FAILURE = failure;
+        this.SUCCESS = success;
+        this.REQUEST = request;
+        this.ERROR = error;
+        this.INDICATOR = indicator;
+        this.CONTEXT = context;
     }
 
     /**
@@ -51,8 +60,12 @@ public class RestClient {
     private void request(HttpMethod method) {
         final RestService service = RestCreator.getService();
         Call<String> call = null;
-        if (REQUEST == null) {
+        if (REQUEST != null) {
             REQUEST.onStart();
+        }
+        if (INDICATOR != null){
+            Log.e(TAG, "request: "+"show loading" );
+            LatteLoader.showLoading(CONTEXT,INDICATOR.name());
         }
         switch (method) {
             case GET:
@@ -73,7 +86,7 @@ public class RestClient {
     }
 
     private Callback<String> getRequestCallBack() {
-        return new RequestCallbacks(FAILURE, SUCCESS, REQUEST, ERROR);
+        return new RequestCallbacks(FAILURE, SUCCESS, REQUEST, ERROR, INDICATOR);
     }
 
     public final void get() {
