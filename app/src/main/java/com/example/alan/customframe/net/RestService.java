@@ -18,10 +18,6 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
-/**
- * Created by Alan on 2017/12/14.
- */
-
 public interface RestService {
 
     @GET
@@ -54,7 +50,6 @@ public interface RestService {
     @GET
     Call<ResponseBody> download(@Url String url, @QueryMap Map<String,Object> params);
 
-    // to do
 
     /**
      * Multipart 表示请求体是一个支持上传的表单

@@ -10,9 +10,9 @@ import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.ISuccess;
 
 /**
- * DATE:2017/12/15
- * USER:Alan
- * FUNCTION:
+ * DATE : 2017/12/15
+ * USER : Alan
+ * FUNCTION :
  * ISSUE:
  */
 
@@ -44,7 +44,7 @@ public class TestDelegate extends LatteDelegate {
                     public void onError(int code, String message) {
                         Log.e(TAG, "onError: "+ message);
                     }
-                }).setUrl("https://tieba.baidu.com/")
+                }).setUrl("https://tieba.baidu.com")
                 .setSuccess(new ISuccess() {
                     @Override
                     public void onSuccess(String message) {
