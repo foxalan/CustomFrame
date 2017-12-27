@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Function :
+ * Function : 启动页面
  * Modify Date : 2017/12/27
  * Author : Alan
  * Issue : TODO

@@ -54,4 +54,6 @@ dependencies {
     //loading图片
     compile 'com.wang.avi:library:2.1.3'
     implementation 'com.android.support:design:27.0.2'
+    //广告页面
+    compile 'com.bigkoo:convenientbanner:2.0.5'
 }
