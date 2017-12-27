@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -15,6 +19,8 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder unbinder;
+    private List<String> stringList = new ArrayList<>();
+    private List<String> stringList1 = new LinkedList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
