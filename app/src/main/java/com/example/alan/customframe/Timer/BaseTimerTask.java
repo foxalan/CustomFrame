@@ -2,7 +2,7 @@ package com.example.alan.customframe.Timer;
 
 import java.util.TimerTask;
 
-/**
+/*
  * Function : 时间工具
  * Modify Date : 2017/12/27
  * Author : Alan
