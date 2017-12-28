@@ -5,8 +5,10 @@ import android.support.v7.widget.AppCompatTextView;
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.Timer.BaseTimerTask;
 import com.example.alan.customframe.Timer.ITimerCallBack;
+import com.example.alan.customframe.config.ConfigType;
 import com.example.alan.customframe.delegate.LatteDelegate;
 import com.example.alan.customframe.util.LogUtil;
+import com.example.alan.customframe.util.PreferenceUtil;
 
 import java.util.Timer;
 
@@ -34,6 +36,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
     private Timer timer = null;
     private BaseTimerTask baseTimerTask = null;
     private int total_time = 5;
+    private boolean isFirstEnter;
 
     @Override
     public Object getLayout() {
@@ -48,6 +51,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
 
     @Override
     public void onBindView() {
+        isFirstEnter = PreferenceUtil.getBoolean(ConfigType.IS_FRIST_ENTER.name(),true);
         initTimer();
     }
 
@@ -60,7 +64,13 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
         if (total_time < 0) {
             if (timer != null) {
                 timer.cancel();
+                if (isFirstEnter){
+                    start(new AdvertisementDelegate());
+                    PreferenceUtil.getBoolean(ConfigType.IS_FRIST_ENTER.name(),false);
+                }
             }
         }
     }
+
+
 }
