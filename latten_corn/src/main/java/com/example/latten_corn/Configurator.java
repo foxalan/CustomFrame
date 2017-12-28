@@ -76,4 +76,12 @@ public class Configurator {
         return (T) LATTE_CONFIGS.get(key);
     }
 
+    @SuppressWarnings("unchecked")
+    public final <T> T getConfiguration(ConfigType key) {
+        checkConfiguration();
+        return (T) LATTE_CONFIGS.get(key.name());
+    }
+
+
+
 }

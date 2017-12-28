@@ -7,19 +7,10 @@ import com.example.alan.customframe.delegate.sign.RegisterDelegate;
 public class MainActivity extends ProxyActivity {
 
 
-
     @Override
     public LatteDelegate setRootDelegate() {
-
-//        ActionBar actionBar = getActionBar();
-//        if (actionBar!=null){
-//            actionBar.hide();
-//        }
-
         return new RegisterDelegate();
     }
-
-
 
 
 }
