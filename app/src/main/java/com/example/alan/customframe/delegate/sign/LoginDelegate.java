@@ -1,5 +1,6 @@
 package com.example.alan.customframe.delegate.sign;
 
+import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
 
 /**
@@ -16,7 +17,7 @@ public class LoginDelegate extends LatteDelegate{
 
     @Override
     public Object getLayout() {
-        return null;
+        return R.layout.delegate_login;
     }
 
     @Override
