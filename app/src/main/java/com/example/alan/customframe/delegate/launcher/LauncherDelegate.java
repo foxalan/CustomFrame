@@ -18,7 +18,7 @@ import butterknife.OnClick;
 /**
  * Function : 启动页面
  * Modify Date : 2017/12/27
- * Author : Alan
+ * @Author : Alan
  * Issue : TODO
  * Whether Solve :
  */
@@ -35,7 +35,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
 
     private Timer timer = null;
     private BaseTimerTask baseTimerTask = null;
-    private int total_time = 5;
+    private int totalTime = 5;
     private boolean isFirstEnter;
 
     @Override
@@ -56,17 +56,19 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
     }
 
     //todo
-    //做了一个runOnUiThread的处理
+
     @Override
     public void onTimer() {
-        appCompatTextView.setText("跳过" + total_time + "s");
-        total_time--;
-        if (total_time < 0) {
+        appCompatTextView.setText("跳过" + totalTime + "s");
+        totalTime--;
+        if (totalTime < 0) {
             if (timer != null) {
                 timer.cancel();
                 if (isFirstEnter){
                     start(new AdvertisementDelegate());
-                    PreferenceUtil.getBoolean(ConfigType.IS_FRIST_ENTER.name(),false);
+                    PreferenceUtil.putBoolean(ConfigType.IS_FRIST_ENTER.name(),false);
+                }else {
+                    //todo
                 }
             }
         }

@@ -9,7 +9,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 /**
  * Function :
  * Modify Date : 2017/12/27
- * Author : Alan
+ * @Author : Alan
  * Issue : TODO
  * Whether Solve :
  */

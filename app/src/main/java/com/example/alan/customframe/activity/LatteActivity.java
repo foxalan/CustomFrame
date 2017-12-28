@@ -7,11 +7,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportActivity;
 
-/**
- * Created by Alan on 2017/12/11.
- */
 
-public abstract class LatteActivity extends SupportActivity{
+
+ abstract class LatteActivity extends SupportActivity{
 
     private Unbinder unbinder;
 

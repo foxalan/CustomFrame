@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * Created by Alan on 2017/12/11.
- */
+
 
 public abstract class BaseFragment extends Fragment {
 
