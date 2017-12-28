@@ -12,7 +12,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 
 
-public abstract class BaseDelegate extends SwipeBackFragment {
+abstract class BaseDelegate extends SwipeBackFragment {
 
     public abstract Object getLayout();
 

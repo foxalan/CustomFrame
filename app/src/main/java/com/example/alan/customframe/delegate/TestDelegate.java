@@ -9,12 +9,7 @@ import com.example.alan.customframe.net.callback.IError;
 import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.ISuccess;
 
-/**
- * DATE : 2017/12/15
- * USER : Alan
- * FUNCTION :
- * ISSUE:
- */
+
 
 public class TestDelegate extends LatteDelegate {
 

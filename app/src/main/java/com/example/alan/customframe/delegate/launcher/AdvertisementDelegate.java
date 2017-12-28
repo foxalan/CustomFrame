@@ -47,7 +47,6 @@ public class AdvertisementDelegate extends LatteDelegate implements OnItemClickL
 
     }
 
-    //初始化数据
     private void initImageData() {
         for (int id : images) {
             integers.add(id);

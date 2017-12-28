@@ -14,7 +14,7 @@ import butterknife.OnClick;
 /**
  * Function : 登录页面
  * Modify Date : 2017/12/28
- * Author : Alan
+ * @Author : Alan
  * Issue : TODO
  * Whether Solve :
  */
@@ -29,6 +29,8 @@ public class LoginDelegate extends LatteDelegate {
     AppCompatCheckBox cb_sign_up_keep_password;
     @BindView(R.id.tv_sign_up_find_password)
     AppCompatTextView tv_sign_up_find_password;
+
+    private int phoneCount = 11;
 
     @OnClick({R.id.bt_login, R.id.tv_go_to_register})
     void onClick(View view) {
@@ -51,7 +53,7 @@ public class LoginDelegate extends LatteDelegate {
         String phone = et_sign_up_phone.getText().toString();
         String password = et_sign_up_password.getText().toString();
 
-        if (phone.isEmpty() || phone.length() != 11) {
+        if (phone.isEmpty() || phone.length() != phoneCount ) {
             isPass = false;
             et_sign_up_phone.setError("请输入正确的电话号码");
         } else {

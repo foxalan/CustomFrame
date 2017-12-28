@@ -11,12 +11,13 @@ import butterknife.OnClick;
 /**
  * Function : 注册
  * Modify Date : 2017/12/28
- * Author : Alan
+ *
+ * @Author : Alan
  * Issue : TODO
  * Whether Solve :
  */
 
-public class RegisterDelegate extends LatteDelegate{
+public class RegisterDelegate extends LatteDelegate {
     @BindView(R.id.et_register_phone)
     TextInputEditText et_register_phone;
     @BindView(R.id.et_register_password)
@@ -26,51 +27,53 @@ public class RegisterDelegate extends LatteDelegate{
     @BindView(R.id.et_register_prove)
     TextInputEditText et_register_prove;
 
+    private int phoneCount = 11;
+
     @OnClick(R.id.bt_register)
-    void onClickRegister(){
-        if (checkForm()){
+    void onClickRegister() {
+        if (checkForm()) {
 
         }
     }
 
-    boolean checkForm(){
+    boolean checkForm() {
         boolean isPass = true;
         String phone = et_register_phone.getText().toString();
         String password = et_register_password.getText().toString();
         String rePassword = et_register_password_again.getText().toString();
         String prove = et_register_prove.getText().toString();
-        if (phone.isEmpty()||phone.length()!=11){
+        if (phone.isEmpty() || phone.length() != phoneCount) {
             et_register_phone.setError("请输入正确的电话号码");
             isPass = false;
-        }else {
+        } else {
             et_register_phone.setError(null);
         }
 
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             et_register_password.setError("请输入密码");
             isPass = false;
-        }else {
+        } else {
             et_register_password.setError(null);
         }
 
-        if (rePassword.isEmpty()){
+        if (rePassword.isEmpty()) {
             et_register_password_again.setError("请再次输入密码");
             isPass = false;
-        }else {
+        } else {
             et_register_password_again.setError(null);
         }
 
-        if (!password.isEmpty()&&!rePassword.equals(password)){
+        if (!password.isEmpty() && !rePassword.equals(password)) {
             et_register_password_again.setError("两次密码不一样");
             isPass = false;
-        }else {
+        } else {
             et_register_password_again.setError(null);
         }
 
-        if (prove.isEmpty()){
+        if (prove.isEmpty()) {
             et_register_prove.setError("请输入验证码");
             isPass = false;
-        }else {
+        } else {
             et_register_prove.setError(null);
         }
 
