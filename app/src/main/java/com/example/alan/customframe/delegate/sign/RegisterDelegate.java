@@ -1,7 +1,12 @@
 package com.example.alan.customframe.delegate.sign;
 
+import android.support.design.widget.TextInputEditText;
+
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Function : 注册
@@ -12,6 +17,66 @@ import com.example.alan.customframe.delegate.LatteDelegate;
  */
 
 public class RegisterDelegate extends LatteDelegate{
+    @BindView(R.id.et_register_phone)
+    TextInputEditText et_register_phone;
+    @BindView(R.id.et_register_password)
+    TextInputEditText et_register_password;
+    @BindView(R.id.et_register_password_again)
+    TextInputEditText et_register_password_again;
+    @BindView(R.id.et_register_prove)
+    TextInputEditText et_register_prove;
+
+    @OnClick(R.id.bt_register)
+    void onClickRegister(){
+        if (checkForm()){
+
+        }
+    }
+
+    boolean checkForm(){
+        boolean isPass = true;
+        String phone = et_register_phone.getText().toString();
+        String password = et_register_password.getText().toString();
+        String rePassword = et_register_password_again.getText().toString();
+        String prove = et_register_prove.getText().toString();
+        if (phone.isEmpty()||phone.length()!=11){
+            et_register_phone.setError("请输入正确的电话号码");
+            isPass = false;
+        }else {
+            et_register_phone.setError(null);
+        }
+
+        if (password.isEmpty()){
+            et_register_password.setError("请输入密码");
+            isPass = false;
+        }else {
+            et_register_password.setError(null);
+        }
+
+        if (rePassword.isEmpty()){
+            et_register_password_again.setError("请再次输入密码");
+            isPass = false;
+        }else {
+            et_register_password_again.setError(null);
+        }
+
+        if (!password.isEmpty()&&!rePassword.equals(password)){
+            et_register_password_again.setError("两次密码不一样");
+            isPass = false;
+        }else {
+            et_register_password_again.setError(null);
+        }
+
+        if (prove.isEmpty()){
+            et_register_prove.setError("请输入验证码");
+            isPass = false;
+        }else {
+            et_register_prove.setError(null);
+        }
+
+        return isPass;
+
+    }
 
     @Override
     public Object getLayout() {
