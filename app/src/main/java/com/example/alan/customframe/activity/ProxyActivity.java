@@ -13,9 +13,9 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Created by Alan on 2017/12/12.
  */
 
- abstract class ProxyActivity extends SupportActivity {
+public abstract class ProxyActivity extends SupportActivity {
 
-    abstract LatteDelegate setRootDelegate();
+   public  abstract LatteDelegate setRootDelegate();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

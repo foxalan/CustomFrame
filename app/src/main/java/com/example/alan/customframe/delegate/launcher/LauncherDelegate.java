@@ -1,5 +1,6 @@
 package com.example.alan.customframe.delegate.launcher;
 
+import android.app.Activity;
 import android.support.v7.widget.AppCompatTextView;
 
 import com.example.alan.customframe.R;
@@ -7,6 +8,8 @@ import com.example.alan.customframe.Timer.BaseTimerTask;
 import com.example.alan.customframe.Timer.ITimerCallBack;
 import com.example.alan.customframe.config.ConfigType;
 import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.login.CheckLoginMessage;
+import com.example.alan.customframe.login.ISignCallBack;
 import com.example.alan.customframe.util.LogUtil;
 import com.example.alan.customframe.util.PreferenceUtil;
 
@@ -37,6 +40,15 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
     private BaseTimerTask baseTimerTask = null;
     private int totalTime = 5;
     private boolean isFirstEnter;
+    private ISignCallBack signCallBack = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof  ISignCallBack){
+            signCallBack = (ISignCallBack) activity;
+        }
+    }
 
     @Override
     public Object getLayout() {
@@ -51,7 +63,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
 
     @Override
     public void onBindView() {
-        isFirstEnter = PreferenceUtil.getBoolean(ConfigType.IS_FRIST_ENTER.name(),true);
+        isFirstEnter = PreferenceUtil.getBoolean(ConfigType.IS_FIRST_ENTER.name(),true);
         initTimer();
     }
 
@@ -65,10 +77,15 @@ public class LauncherDelegate extends LatteDelegate implements ITimerCallBack {
             if (timer != null) {
                 timer.cancel();
                 if (isFirstEnter){
-                    start(new AdvertisementDelegate());
-                    PreferenceUtil.putBoolean(ConfigType.IS_FRIST_ENTER.name(),false);
+                    start(new AdvertisementDelegate(),SINGLETASK);
+                    PreferenceUtil.putBoolean(ConfigType.IS_FIRST_ENTER.name(),false);
                 }else {
                     //todo
+                    if (CheckLoginMessage.checkLogin()){
+                        signCallBack.onSignIn();
+                    }else {
+                        signCallBack.onSignOut();
+                    }
                 }
             }
         }

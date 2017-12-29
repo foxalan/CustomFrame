@@ -1,5 +1,4 @@
 package com.example.alan.customframe.delegate;
 
-
-abstract class LatteDelegate extends PermissionCheckDelegate {
+public abstract  class LatteDelegate extends PermissionCheckDelegate {
 }

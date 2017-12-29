@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.login.CheckLoginMessage;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,11 +38,12 @@ public class LoginDelegate extends LatteDelegate {
         switch (view.getId()) {
             case R.id.bt_login:
                 if (checkFrom()) {
-                    //todo
+
+                    CheckLoginMessage.setLoginTrue();
                 }
                 break;
             case R.id.tv_go_to_register:
-                start(new RegisterDelegate());
+                start(new RegisterDelegate(),SINGLETASK);
                 break;
             default:
                 break;
