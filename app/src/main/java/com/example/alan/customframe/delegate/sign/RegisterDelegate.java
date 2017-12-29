@@ -1,6 +1,7 @@
 package com.example.alan.customframe.delegate.sign;
 
 import android.support.design.widget.TextInputEditText;
+import android.view.View;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
@@ -11,7 +12,6 @@ import butterknife.OnClick;
 /**
  * Function : 注册
  * Modify Date : 2017/12/28
- *
  * @Author : Alan
  * Issue : TODO
  * Whether Solve :
@@ -29,11 +29,21 @@ public class RegisterDelegate extends LatteDelegate {
 
     private int phoneCount = 11;
 
-    @OnClick(R.id.bt_register)
-    void onClickRegister() {
-        if (checkForm()) {
+    @OnClick({R.id.bt_register, R.id.tv_go_to_sign})
+    void onClickRegister(View view) {
+        switch (view.getId()) {
+            case R.id.bt_register:
+                if (checkForm()) {
 
+                }
+                break;
+            case R.id.tv_go_to_sign:
+                start(new LoginDelegate(),SINGLETASK);
+                break;
+            default:
+                break;
         }
+
     }
 
     boolean checkForm() {
