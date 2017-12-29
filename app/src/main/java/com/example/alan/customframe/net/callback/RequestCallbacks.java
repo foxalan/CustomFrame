@@ -8,6 +8,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * @author Alan
+ */
+
 
 public class RequestCallbacks implements Callback<String> {
 
@@ -17,7 +21,7 @@ public class RequestCallbacks implements Callback<String> {
     private IError error;
     private LoadingIndicator indicator;
 
-    public RequestCallbacks(IFailure failure, ISuccess success, IRequest request, IError error,LoadingIndicator indicator) {
+    public RequestCallbacks(IFailure failure, ISuccess success, IRequest request, IError error, LoadingIndicator indicator) {
         this.failure = failure;
         this.success = success;
         this.request = request;
@@ -30,24 +34,32 @@ public class RequestCallbacks implements Callback<String> {
 
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
-
                 success.onSuccess(response.body());
+                if (request != null) {
+                    request.onEnd();
+                }
             }
         } else {
-            error.onError(response.code(), response.message());
+            if (error != null) {
+                error.onError(response.code(), response.message());
+                if (request != null) {
+                    request.onEnd();
+                }
+            }
         }
 
-        if (indicator!=null){
+        if (indicator != null) {
             LatteLoader.stopLoading();
         }
-
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-        failure.IFailure();
-//        if (indicator!=null){
-//            LatteLoader.stopLoading();
-//        }
+        if (failure != null) {
+            failure.IFailure();
+            if (request!=null){
+                request.onEnd();
+            }
+        }
     }
 }

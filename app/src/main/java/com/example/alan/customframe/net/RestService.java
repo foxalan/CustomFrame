@@ -20,9 +20,21 @@ import retrofit2.http.Url;
 
 public interface RestService {
 
+    /**
+     * get请求
+     * @param url
+     * @param params
+     * @return
+     */
     @GET
     Call<String> get(@Url String url, @QueryMap Map<String,Object> params);
 
+    /**
+     * post请求
+     * @param url
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @POST
     Call<String> post(@Url String url, @FieldMap Map<String,Object> params);
@@ -37,6 +49,12 @@ public interface RestService {
     @PUT
     Call<String> put(@Url String url, @FieldMap Map<String,Object> params);
 
+    /**
+     * delete请求
+     * @param url
+     * @param params
+     * @return
+     */
     @DELETE
     Call<String> delete(@Url String url, @QueryMap Map<String,Object> params);
 

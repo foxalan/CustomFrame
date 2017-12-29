@@ -5,5 +5,8 @@ package com.example.alan.customframe.net.callback;
  */
 
 public interface IFailure {
+    /**
+     * 数据请求不到的回调
+     */
     void IFailure();
 }

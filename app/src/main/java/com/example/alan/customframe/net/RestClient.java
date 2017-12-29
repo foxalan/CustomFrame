@@ -18,6 +18,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 
+/**
+ * @author Alan
+ */
+
 public class RestClient {
 
     private final String URL;
@@ -50,7 +54,7 @@ public class RestClient {
      * 购造单例模式
      */
     private static final class RetrofitHolder {
-        public static final RestClientBuilder BUILDER = new RestClientBuilder();
+        private static final RestClientBuilder BUILDER = new RestClientBuilder();
     }
 
     public static RestClientBuilder builder() {
@@ -72,14 +76,18 @@ public class RestClient {
                 call = service.get(URL, params);
                 break;
             case POST:
+                call = service.post(URL,params);
                 break;
             case PUT:
+                call = service.put(URL,params);
                 break;
             case UPLOAD:
+
                 break;
             default:
                 break;
         }
+
         if (call != null) {
             call.enqueue(getRequestCallBack());
         }
@@ -92,6 +100,12 @@ public class RestClient {
     public final void get() {
         request(HttpMethod.GET);
     }
+
+    public final void post(){request(HttpMethod.POST);}
+
+    public final void put(){request(HttpMethod.PUT);}
+
+
 
 
 }

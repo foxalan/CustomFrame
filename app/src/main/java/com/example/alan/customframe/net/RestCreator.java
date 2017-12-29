@@ -9,7 +9,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-
+/**
+ * @author Alan
+ */
 
 public class RestCreator {
 
