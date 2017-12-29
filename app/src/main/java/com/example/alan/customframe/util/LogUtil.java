@@ -5,7 +5,7 @@ import android.util.Log;
 /**
  * Function : Log工具
  * Modify Date : 2017/12/27
- * Author : Alan
+ * @Author : Alan
  * Issue : TODO
  * Whether Solve :
  */

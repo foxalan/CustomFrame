@@ -1,7 +1,7 @@
 package com.example.alan.customframe.net.callback;
 
 /**
- * Created by Alan on 2017/12/14.
+ * @author Alan
  */
 
 public interface IRequest {

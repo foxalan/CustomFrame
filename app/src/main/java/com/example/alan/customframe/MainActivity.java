@@ -12,6 +12,10 @@ import com.example.alan.customframe.delegate.sign.LoginDelegate;
 import com.example.alan.customframe.login.ISignCallBack;
 import com.example.alan.customframe.util.LogUtil;
 
+/**
+ * @author Alan
+ */
+
 public class MainActivity extends ProxyActivity implements ISignCallBack{
 
     @Override
@@ -21,7 +25,6 @@ public class MainActivity extends ProxyActivity implements ISignCallBack{
         if (actionBar!=null){
             actionBar.hide();
         }
-
     }
 
     @Override

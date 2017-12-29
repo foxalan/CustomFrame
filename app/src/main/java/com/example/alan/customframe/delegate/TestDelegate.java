@@ -10,6 +10,9 @@ import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.ISuccess;
 
 
+/**
+ * @author Alan
+ */
 
 public class TestDelegate extends LatteDelegate {
 
@@ -54,8 +57,8 @@ public class TestDelegate extends LatteDelegate {
                 })
                 .setFailure(new IFailure() {
                     @Override
-                    public void IFailure() {
-                        Log.e(TAG, "IFailure: " );
+                    public void onFailure() {
+
                     }
                 })
                 .loader(getContext(), LoadingIndicator.PacmanIndicator)

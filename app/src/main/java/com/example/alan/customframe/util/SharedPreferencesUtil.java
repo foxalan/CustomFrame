@@ -14,7 +14,7 @@ import android.content.SharedPreferences;
 
 public class SharedPreferencesUtil {
 
-    //存储的sharedpreferences文件名
+
     private static final String FILE_NAME = "save_file_name";
 
     /**

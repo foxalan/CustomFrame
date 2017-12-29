@@ -25,9 +25,6 @@ public class FoxRecyclerAdapter extends LatteRecyclerAdapter<String> {
     @Override
     public LatteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-
-
-
         return null;
     }
 
@@ -36,9 +33,6 @@ public class FoxRecyclerAdapter extends LatteRecyclerAdapter<String> {
         super.onBindViewHolder(holder, position);
 
         FoxViewHolder foxViewHolder = (FoxViewHolder) holder;
-
-
-
     }
 
     class FoxViewHolder extends LatteViewHolder {
@@ -50,9 +44,6 @@ public class FoxRecyclerAdapter extends LatteRecyclerAdapter<String> {
             super(itemView);
 
         }
-
-
-
     }
 
 

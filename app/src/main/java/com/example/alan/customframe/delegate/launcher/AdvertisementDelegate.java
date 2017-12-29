@@ -68,7 +68,7 @@ public class AdvertisementDelegate extends LatteDelegate implements OnItemClickL
         LogUtil.e(position + "====");
         if (position == (images.length - 1)) {
 
-            start(new LoginDelegate());
+            start(new LoginDelegate(),SINGLETASK);
         }
     }
 }

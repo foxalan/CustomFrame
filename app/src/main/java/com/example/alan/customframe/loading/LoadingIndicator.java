@@ -1,5 +1,9 @@
 package com.example.alan.customframe.loading;
 
+/**
+ * @author Alan
+ */
+
 @SuppressWarnings("unused")
 public enum LoadingIndicator {
     BallPulseIndicator,
