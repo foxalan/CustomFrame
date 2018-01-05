@@ -20,7 +20,9 @@ public class LatteLoader {
     private static final int LOADER_SIZE_SCALE = 8;
 
     private static final ArrayList<AppCompatDialog> LOADERS = new ArrayList<>();
-    //默认的Loading样式
+    /**
+     *默认的Loading样式
+     */
     private static final String DEFAULT_TYPE = LoadingIndicator.BallBeatIndicator.name();
 
     public static void showLoading(Context context,String type){
