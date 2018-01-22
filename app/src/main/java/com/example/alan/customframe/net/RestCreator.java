@@ -3,6 +3,7 @@ package com.example.alan.customframe.net;
 import com.example.latten_corn.ConfigType;
 import com.example.latten_corn.Latte;
 
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -18,6 +19,17 @@ public class RestCreator {
     /**
      * 创建 Retrofit 实例
      */
+
+    /**
+     * 参数容器
+     */
+    private static final class ParamsHolder {
+        private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
+    }
+
+    public static WeakHashMap<String, Object> getParams() {
+        return ParamsHolder.PARAMS;
+    }
 
     private static final class RetrofitHolder {
         private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigType.API_HOST.name());

@@ -11,6 +11,7 @@ import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.IRequest;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.net.callback.RequestCallbacks;
+import com.example.alan.customframe.net.download.DownloadHandler;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,7 +38,10 @@ public class RestClient {
     private final LoadingIndicator INDICATOR;
     private final Context CONTEXT;
     private final File FILE;
-
+    //用于下载
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
     private static final String TAG = "RestClient";
 
 
@@ -46,6 +50,9 @@ public class RestClient {
                       IRequest request, IError error,
                       LoadingIndicator indicator,
                       File file,
+                      String download_dir,
+                      String extension,
+                      String name,
                       Context context) {
         this.URL = URL;
         this.params = params;
@@ -55,6 +62,9 @@ public class RestClient {
         this.ERROR = error;
         this.INDICATOR = indicator;
         this.FILE = file;
+        this.DOWNLOAD_DIR = download_dir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.CONTEXT = context;
     }
 
@@ -123,7 +133,9 @@ public class RestClient {
         request(HttpMethod.UPLOAD);
     }
 
-
-
-
+    public final void download(){
+        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
+                SUCCESS, FAILURE, ERROR)
+                .handleDownload();
+    }
 }

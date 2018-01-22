@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 /**
  * @author Alan
- * Created by Alan on 2017/12/14.
+ *         Created by Alan on 2017/12/14.
  */
 
 public class RestClientBuilder {
@@ -27,6 +27,10 @@ public class RestClientBuilder {
     private LoadingIndicator indicator;
     private Context context;
     private File file;
+
+    private String mDownloadDir = null;
+    private String mExtension = null;
+    private String mName = null;
 
     public RestClientBuilder setUrl(String url) {
         this.url = url;
@@ -69,7 +73,23 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder name(String name) {
+        this.mName = name;
+        return this;
+    }
+
+    public final RestClientBuilder dir(String dir) {
+        this.mDownloadDir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension) {
+        this.mExtension = extension;
+        return this;
+    }
+
     public RestClient build() {
-        return new RestClient(url, params, failure, success, request, error, indicator, file, context);
+        return new RestClient(url, params, failure, success, request, error, indicator, file,
+                mDownloadDir, mExtension, mName, context);
     }
 }
