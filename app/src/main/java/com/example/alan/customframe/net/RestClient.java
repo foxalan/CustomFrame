@@ -12,8 +12,12 @@ import com.example.alan.customframe.net.callback.IRequest;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.net.callback.RequestCallbacks;
 
+import java.io.File;
 import java.util.HashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -32,6 +36,7 @@ public class RestClient {
     private final IError ERROR;
     private final LoadingIndicator INDICATOR;
     private final Context CONTEXT;
+    private final File FILE;
 
     private static final String TAG = "RestClient";
 
@@ -39,7 +44,9 @@ public class RestClient {
     public RestClient(String URL, HashMap<String, Object> params,
                       IFailure failure, ISuccess success,
                       IRequest request, IError error,
-                      LoadingIndicator indicator, Context context) {
+                      LoadingIndicator indicator,
+                      File file,
+                      Context context) {
         this.URL = URL;
         this.params = params;
         this.FAILURE = failure;
@@ -47,6 +54,7 @@ public class RestClient {
         this.REQUEST = request;
         this.ERROR = error;
         this.INDICATOR = indicator;
+        this.FILE = file;
         this.CONTEXT = context;
     }
 
@@ -64,9 +72,11 @@ public class RestClient {
     private void request(HttpMethod method) {
         final RestService service = RestCreator.getService();
         Call<String> call = null;
+
         if (REQUEST != null) {
             REQUEST.onStart();
         }
+
         if (INDICATOR != null){
             Log.e(TAG, "request: "+"show loading" );
             LatteLoader.showLoading(CONTEXT,INDICATOR.name());
@@ -82,7 +92,11 @@ public class RestClient {
                 call = service.put(URL,params);
                 break;
             case UPLOAD:
-
+                final RequestBody requestBody =
+                        RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                final MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = service.upload(URL, body);
                 break;
             default:
                 break;
@@ -104,6 +118,10 @@ public class RestClient {
     public final void post(){request(HttpMethod.POST);}
 
     public final void put(){request(HttpMethod.PUT);}
+
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
 
 
 
