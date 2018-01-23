@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBar;
 import com.example.alan.customframe.activity.ProxyActivity;
 import com.example.alan.customframe.delegate.LatteDelegate;
 import com.example.alan.customframe.delegate.TestDelegate;
-import com.example.alan.customframe.delegate.launcher.LauncherDelegate;
+import com.example.alan.customframe.delegate.home.HomeDelegate;
 import com.example.alan.customframe.delegate.sign.LoginDelegate;
 import com.example.alan.customframe.login.ISignCallBack;
 import com.example.alan.customframe.util.LogUtil;
@@ -29,7 +29,7 @@ public class MainActivity extends ProxyActivity implements ISignCallBack{
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new HomeDelegate();
     }
 
 

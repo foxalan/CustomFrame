@@ -57,7 +57,7 @@ public class RequestCallbacks implements Callback<String> {
     @Override
     public void onFailure(Call<String> call, Throwable t) {
         if (failure != null) {
-            failure.IFailure();
+            failure.onFailure();
             if (request!=null){
                 request.onEnd();
             }

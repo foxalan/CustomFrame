@@ -8,7 +8,7 @@ import com.example.latten_corn.Latte;
 
 
 /**
- * @author Alan 
+ * @author Alan
  */
 
 public abstract class BaseBottomItemDelegate extends LatteDelegate {

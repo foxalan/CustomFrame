@@ -1,6 +1,12 @@
 package com.example.alan.customframe.delegate.home;
 
-import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.delegate.home.bottom.BaseBottomDelegate;
+import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
+import com.example.alan.customframe.delegate.home.bottom.BottomItemBean;
+import com.example.alan.customframe.delegate.home.bottom.ItemBuilder;
+import com.example.alan.customframe.delegate.index.IndexDelegate;
+
+import java.util.LinkedHashMap;
 
 /**
  * Function :
@@ -11,16 +17,20 @@ import com.example.alan.customframe.delegate.LatteDelegate;
  * Whether Solve :
  */
 
-public class HomeDelegate extends LatteDelegate {
+public class HomeDelegate extends BaseBottomDelegate {
 
     @Override
-    public Object getLayout() {
-        return null;
+    public LinkedHashMap<BottomItemBean, BaseBottomItemDelegate> setItems(ItemBuilder builder) {
+
+        final LinkedHashMap<BottomItemBean, BaseBottomItemDelegate> items = new LinkedHashMap<>();
+        items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
+        items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
+        return builder.addItems(items).build();
+
     }
 
-
     @Override
-    public void onBindView() {
-
+    public int setClickColor() {
+        return 0;
     }
 }
