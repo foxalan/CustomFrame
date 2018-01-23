@@ -13,7 +13,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 public class FoxApp extends Application {
 
-    private String host = "https://tieba.baidu.com/";
+    private String host = "http://10.203.147.140:8080/RestServer/api/";
 
     @Override
     public void onCreate() {
@@ -30,5 +30,6 @@ public class FoxApp extends Application {
 
         //初始化内存检测包
         LeakCanary.install(this);
+
     }
 }

@@ -1,66 +1,76 @@
 package com.example.alan.customframe.net.callback;
 
+import android.os.Handler;
 
 import com.example.alan.customframe.loading.LatteLoader;
-import com.example.alan.customframe.loading.LoadingIndicator;
+import com.example.alan.customframe.loading.LoaderStyle;
+import com.example.alan.customframe.net.RestCreator;
+import com.example.latten_corn.Latte;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * @author Alan
- *
+ * Created by 傅令杰 on 2017/4/2
  */
 
+public final class RequestCallbacks implements Callback<String> {
 
-public class RequestCallbacks implements Callback<String> {
+    private final IRequest REQUEST;
+    private final ISuccess SUCCESS;
+    private final IFailure FAILURE;
+    private final IError ERROR;
+    private final LoaderStyle LOADER_STYLE;
+    private static final Handler HANDLER = Latte.getHandler();
 
-    private IFailure failure;
-    private ISuccess success;
-    private IRequest request;
-    private IError error;
-    private LoadingIndicator indicator;
-
-    public RequestCallbacks(IFailure failure, ISuccess success, IRequest request, IError error, LoadingIndicator indicator) {
-        this.failure = failure;
-        this.success = success;
-        this.request = request;
-        this.error = error;
-        this.indicator = indicator;
+    public RequestCallbacks(IRequest request, ISuccess success, IFailure failure, IError error, LoaderStyle style) {
+        this.REQUEST = request;
+        this.SUCCESS = success;
+        this.FAILURE = failure;
+        this.ERROR = error;
+        this.LOADER_STYLE = style;
     }
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
-
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
-                success.onSuccess(response.body());
-                if (request != null) {
-                    request.onEnd();
+                if (SUCCESS != null) {
+                    SUCCESS.onSuccess(response.body());
                 }
             }
         } else {
-            if (error != null) {
-                error.onError(response.code(), response.message());
-                if (request != null) {
-                    request.onEnd();
-                }
+            if (ERROR != null) {
+                ERROR.onError(response.code(), response.message());
             }
         }
 
-        if (indicator != null) {
-            LatteLoader.stopLoading();
-        }
+        onRequestFinish();
     }
 
     @Override
     public void onFailure(Call<String> call, Throwable t) {
-        if (failure != null) {
-            failure.onFailure();
-            if (request!=null){
-                request.onEnd();
-            }
+        if (FAILURE != null) {
+            FAILURE.onFailure();
+        }
+        if (REQUEST != null) {
+            REQUEST.onRequestEnd();
+        }
+
+        onRequestFinish();
+    }
+
+    private void onRequestFinish() {
+        final long delayed = Latte.getConfiguration(ConfigKeys.LOADER_DELAYED);
+        if (LOADER_STYLE != null) {
+            HANDLER.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    RestCreator.getParams().clear();
+                    LatteLoader.stopLoading();
+                }
+            }, delayed);
         }
     }
 }

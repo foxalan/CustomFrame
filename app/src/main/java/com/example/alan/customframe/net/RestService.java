@@ -1,11 +1,12 @@
 package com.example.alan.customframe.net;
 
-import com.squareup.okhttp.ResponseBody;
-
-import java.util.Map;
+import java.util.WeakHashMap;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -18,66 +19,36 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
+/**
+ * Created by 傅令杰 on 2017/4/2
+ */
 public interface RestService {
 
-    /**
-     * get请求
-     * @param url
-     * @param params
-     * @return
-     */
     @GET
-    Call<String> get(@Url String url, @QueryMap Map<String,Object> params);
+    Call<String> get(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
-    /**
-     * post请求
-     * @param url
-     * @param params
-     * @return
-     */
     @FormUrlEncoded
     @POST
-    Call<String> post(@Url String url, @FieldMap Map<String,Object> params);
+    Call<String> post(@Url String url, @FieldMap WeakHashMap<String, Object> params);
 
-    /**
-     * FormUrlEncoded 请求体是一个FORM表单
-     * @param url
-     * @param params
-     * @return
-     */
+    @POST
+    Call<String> postRaw(@Url String url, @Body RequestBody body);
+
     @FormUrlEncoded
     @PUT
-    Call<String> put(@Url String url, @FieldMap Map<String,Object> params);
+    Call<String> put(@Url String url, @FieldMap WeakHashMap<String, Object> params);
 
-    /**
-     * delete请求
-     * @param url
-     * @param params
-     * @return
-     */
+    @PUT
+    Call<String> putRaw(@Url String url, @Body RequestBody body);
+
     @DELETE
-    Call<String> delete(@Url String url, @QueryMap Map<String,Object> params);
+    Call<String> delete(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
-    /**
-     * Streaming表示返回的数据以流的形式返回，不加可能会造成OOM
-     * @param url
-     * @param params
-     * @return
-     */
     @Streaming
     @GET
-    Call<ResponseBody> download(@Url String url, @QueryMap Map<String,Object> params);
+    Call<ResponseBody> download(@Url String url, @QueryMap WeakHashMap<String, Object> params);
 
-
-    /**
-     * Multipart 表示请求体是一个支持上传的表单
-     * @param url
-     * @param file
-     * @return
-     */
     @Multipart
-    @GET
+    @POST
     Call<String> upload(@Url String url, @Part MultipartBody.Part file);
-
-
 }

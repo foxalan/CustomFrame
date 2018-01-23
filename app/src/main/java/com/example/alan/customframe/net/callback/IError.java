@@ -1,15 +1,10 @@
 package com.example.alan.customframe.net.callback;
 
 /**
- * @author Alan
+ * Created by 傅令杰 on 2017/4/2
  */
 
 public interface IError {
 
-    /**
-     * 数据请求错误的回调
-     * @param code
-     * @param message
-     */
-    void onError(int code ,String message);
+    void onError(int code, String msg);
 }

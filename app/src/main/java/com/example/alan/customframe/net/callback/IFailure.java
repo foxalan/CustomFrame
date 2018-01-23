@@ -1,12 +1,10 @@
 package com.example.alan.customframe.net.callback;
 
 /**
- * @author Alan
+ * Created by 傅令杰 on 2017/4/2
  */
 
 public interface IFailure {
-    /**
-     * 数据请求不到的回调
-     */
+
     void onFailure();
 }

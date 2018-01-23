@@ -7,68 +7,43 @@ import com.wang.avi.Indicator;
 
 import java.util.WeakHashMap;
 
+/**
+ * Created by 傅令杰 on 2017/4/2
+ */
 
-@SuppressWarnings("unused")
-public class LoaderCreator {
+final class LoaderCreator {
 
     private static final WeakHashMap<String, Indicator> LOADING_MAP = new WeakHashMap<>();
 
-    public static AVLoadingIndicatorView loadingIndicatorView(String type, Context context) {
-        AVLoadingIndicatorView avLoadingIndicatorView = new AVLoadingIndicatorView(context);
+    static AVLoadingIndicatorView create(String type, Context context) {
 
+        final AVLoadingIndicatorView avLoadingIndicatorView = new AVLoadingIndicatorView(context);
         if (LOADING_MAP.get(type) == null) {
-            Indicator indicator = getIndicator(type);
+            final Indicator indicator = getIndicator(type);
             LOADING_MAP.put(type, indicator);
-
         }
         avLoadingIndicatorView.setIndicator(LOADING_MAP.get(type));
-
         return avLoadingIndicatorView;
     }
 
-    /**
-     * 默认的Loading
-     * @param context
-     * @return
-     */
-    private AVLoadingIndicatorView loadingIndicatorView(Context context) {
-        return loadingIndicatorView(LoadingIndicator.BallBeatIndicator.name(), context);
-    }
-
-    /**
-     * 利用反射机制获取Indicator
-     *
-     * @param name
-     * @return
-     */
     private static Indicator getIndicator(String name) {
         if (name == null || name.isEmpty()) {
             return null;
         }
-
-        final StringBuffer drawableClassName = new StringBuffer();
+        final StringBuilder drawableClassName = new StringBuilder();
         if (!name.contains(".")) {
-            String packageName = AVLoadingIndicatorView.class.getPackage().getName();
-            drawableClassName.append(packageName)
+            final String defaultPackageName = AVLoadingIndicatorView.class.getPackage().getName();
+            drawableClassName.append(defaultPackageName)
                     .append(".indicators")
                     .append(".");
         }
         drawableClassName.append(name);
-
         try {
-            Class<?> drawableClass = Class.forName(drawableClassName.toString());
+            final Class<?> drawableClass = Class.forName(drawableClassName.toString());
             return (Indicator) drawableClass.newInstance();
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
-
     }
-
-
 }

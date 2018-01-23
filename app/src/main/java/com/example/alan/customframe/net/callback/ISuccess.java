@@ -1,14 +1,10 @@
 package com.example.alan.customframe.net.callback;
 
-
 /**
- * @author Alan
+ * Created by 傅令杰 on 2017/4/2
  */
 
 public interface ISuccess {
-    /**
-     * 数据请求成功的回调
-     * @param message
-     */
-    void onSuccess(String message);
+
+    void onSuccess(String response);
 }

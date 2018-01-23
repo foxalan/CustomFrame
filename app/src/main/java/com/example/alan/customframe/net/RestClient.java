@@ -1,11 +1,9 @@
 package com.example.alan.customframe.net;
 
-
 import android.content.Context;
-import android.util.Log;
 
 import com.example.alan.customframe.loading.LatteLoader;
-import com.example.alan.customframe.loading.LoadingIndicator;
+import com.example.alan.customframe.loading.LoaderStyle;
 import com.example.alan.customframe.net.callback.IError;
 import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.IRequest;
@@ -14,7 +12,8 @@ import com.example.alan.customframe.net.callback.RequestCallbacks;
 import com.example.alan.customframe.net.download.DownloadHandler;
 
 import java.io.File;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -22,84 +21,88 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-
 /**
- * @author Alan
+ * Created by 傅令杰 on 2017/4/2
  */
 
-public class RestClient {
+public final class RestClient {
 
+    private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final String URL;
-    private final HashMap<String, Object> params;
-    private final IFailure FAILURE;
-    private final ISuccess SUCCESS;
     private final IRequest REQUEST;
-    private final IError ERROR;
-    private final LoadingIndicator INDICATOR;
-    private final Context CONTEXT;
-    private final File FILE;
-    //用于下载
     private final String DOWNLOAD_DIR;
     private final String EXTENSION;
     private final String NAME;
-    private static final String TAG = "RestClient";
+    private final ISuccess SUCCESS;
+    private final IFailure FAILURE;
+    private final IError ERROR;
+    private final RequestBody BODY;
+    private final LoaderStyle LOADER_STYLE;
+    private final File FILE;
+    private final Context CONTEXT;
 
-
-    public RestClient(String URL, HashMap<String, Object> params,
-                      IFailure failure, ISuccess success,
-                      IRequest request, IError error,
-                      LoadingIndicator indicator,
-                      File file,
-                      String download_dir,
-                      String extension,
-                      String name,
-                      Context context) {
-        this.URL = URL;
-        this.params = params;
-        this.FAILURE = failure;
-        this.SUCCESS = success;
-        this.REQUEST = request;
-        this.ERROR = error;
-        this.INDICATOR = indicator;
-        this.FILE = file;
-        this.DOWNLOAD_DIR = download_dir;
+    RestClient(String url,
+               Map<String, Object> params,
+               String downloadDir,
+               String extension,
+               String name,
+               IRequest request,
+               ISuccess success,
+               IFailure failure,
+               IError error,
+               RequestBody body,
+               File file,
+               Context context,
+               LoaderStyle loaderStyle) {
+        this.URL = url;
+        PARAMS.putAll(params);
+        this.DOWNLOAD_DIR = downloadDir;
         this.EXTENSION = extension;
         this.NAME = name;
+        this.REQUEST = request;
+        this.SUCCESS = success;
+        this.FAILURE = failure;
+        this.ERROR = error;
+        this.BODY = body;
+        this.FILE = file;
         this.CONTEXT = context;
-    }
-
-    /**
-     * 购造单例模式
-     */
-    private static final class RetrofitHolder {
-        private static final RestClientBuilder BUILDER = new RestClientBuilder();
+        this.LOADER_STYLE = loaderStyle;
     }
 
     public static RestClientBuilder builder() {
-        return RetrofitHolder.BUILDER;
+        return new RestClientBuilder();
     }
 
     private void request(HttpMethod method) {
-        final RestService service = RestCreator.getService();
+        final RestService service = RestCreator.getRestService();
         Call<String> call = null;
 
         if (REQUEST != null) {
-            REQUEST.onStart();
+            REQUEST.onRequestStart();
         }
 
-        if (INDICATOR != null){
-            Log.e(TAG, "request: "+"show loading" );
-            LatteLoader.showLoading(CONTEXT,INDICATOR.name());
+        if (LOADER_STYLE != null) {
+            LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
+
         switch (method) {
             case GET:
-                call = service.get(URL, params);
+                call = service.get(URL, PARAMS);
                 break;
             case POST:
-                call = service.post(URL,params);
+                call = service.post(URL, PARAMS);
+                break;
+            case POST_RAW:
+                call = service.postRaw(URL, BODY);
                 break;
             case PUT:
-                call = service.put(URL,params);
+                call = service.put(URL, PARAMS);
+                break;
+            case PUT_RAW:
+                call = service.putRaw(URL, BODY);
+                break;
+            case DELETE:
+                call = service.delete(URL, PARAMS);
                 break;
             case UPLOAD:
                 final RequestBody requestBody =
@@ -113,27 +116,55 @@ public class RestClient {
         }
 
         if (call != null) {
-            call.enqueue(getRequestCallBack());
+            call.enqueue(getRequestCallback());
         }
     }
 
-    private Callback<String> getRequestCallBack() {
-        return new RequestCallbacks(FAILURE, SUCCESS, REQUEST, ERROR, INDICATOR);
+    private Callback<String> getRequestCallback() {
+        return new RequestCallbacks(
+                REQUEST,
+                SUCCESS,
+                FAILURE,
+                ERROR,
+                LOADER_STYLE
+        );
     }
 
     public final void get() {
         request(HttpMethod.GET);
     }
 
-    public final void post(){request(HttpMethod.POST);}
+    public final void post() {
+        if (BODY == null) {
+            request(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.POST_RAW);
+        }
+    }
 
-    public final void put(){request(HttpMethod.PUT);}
+    public final void put() {
+        if (BODY == null) {
+            request(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.PUT_RAW);
+        }
+    }
+
+    public final void delete() {
+        request(HttpMethod.DELETE);
+    }
 
     public final void upload() {
         request(HttpMethod.UPLOAD);
     }
 
-    public final void download(){
+    public final void download() {
         new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
                 SUCCESS, FAILURE, ERROR)
                 .handleDownload();

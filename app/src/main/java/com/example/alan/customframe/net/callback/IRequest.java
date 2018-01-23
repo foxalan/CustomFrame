@@ -1,17 +1,12 @@
 package com.example.alan.customframe.net.callback;
 
 /**
- * @author Alan
+ * Created by 傅令杰 on 2017/4/2
  */
 
 public interface IRequest {
-    /**
-     * 请求开始的回调
-     */
-    void onStart();
 
-    /**
-     * 请求结束的回调
-     */
-    void onEnd();
+    void onRequestStart();
+
+    void onRequestEnd();
 }
