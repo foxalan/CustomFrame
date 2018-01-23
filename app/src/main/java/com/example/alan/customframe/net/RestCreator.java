@@ -15,7 +15,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 /**
- * @author Alan 
+ * @author Alan
  */
 public final class RestCreator {
 
