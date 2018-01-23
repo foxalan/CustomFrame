@@ -21,21 +21,45 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-
+/**
+ * @author Alan
+ */
 
 public final class RestClient {
 
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
+    /**
+     * 请求的URL
+     */
     private final String URL;
+    /**
+     * 开始请求和结束请求的回调
+     */
     private final IRequest REQUEST;
+    /**
+     * 下载目录
+     * 下载目录的名字
+     */
     private final String DOWNLOAD_DIR;
     private final String EXTENSION;
     private final String NAME;
+
+    /**
+     * 请求成功，失败的回调
+     */
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
+
+    /**
+     * 上传 ？？？？
+     */
     private final RequestBody BODY;
+    /**
+     * 等待样式
+     */
     private final LoaderStyle LOADER_STYLE;
+
     private final File FILE;
     private final Context CONTEXT;
 
