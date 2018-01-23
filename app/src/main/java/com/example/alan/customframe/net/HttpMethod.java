@@ -1,8 +1,5 @@
 package com.example.alan.customframe.net;
 
-/**
- * @author Alan
- */
 
 public enum HttpMethod {
 
