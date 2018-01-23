@@ -19,6 +19,9 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
+/**
+ * @author Alan
+ */
 
 public interface RestService {
 

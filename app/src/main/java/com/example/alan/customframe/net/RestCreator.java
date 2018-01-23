@@ -14,7 +14,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
-
+/**
+ * @author Alan 
+ */
 public final class RestCreator {
 
     /**
@@ -34,6 +36,7 @@ public final class RestCreator {
     private static final class OKHttpHolder {
         private static final int TIME_OUT = 60;
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        //todo
         private static final ArrayList<Interceptor> INTERCEPTORS = null;
 
         private static OkHttpClient.Builder addInterceptor() {
