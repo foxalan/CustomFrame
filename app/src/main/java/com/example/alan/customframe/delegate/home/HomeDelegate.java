@@ -5,6 +5,7 @@ import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BottomItemBean;
 import com.example.alan.customframe.delegate.home.bottom.ItemBuilder;
 import com.example.alan.customframe.delegate.index.IndexDelegate;
+import com.example.alan.customframe.delegate.sort.SortDelegate;
 
 import java.util.LinkedHashMap;
 
@@ -24,13 +25,18 @@ public class HomeDelegate extends BaseBottomDelegate {
 
         final LinkedHashMap<BottomItemBean, BaseBottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
-        items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
+        items.put(new BottomItemBean("{fa-sort}", "分类"), new SortDelegate());
         return builder.addItems(items).build();
 
     }
 
     @Override
     public int setClickColor() {
+        return 0;
+    }
+
+    @Override
+    public int setIndexDelegate() {
         return 0;
     }
 }
