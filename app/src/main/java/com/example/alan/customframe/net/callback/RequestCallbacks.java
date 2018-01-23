@@ -1,11 +1,6 @@
 package com.example.alan.customframe.net.callback;
 
-import android.os.Handler;
-
-import com.example.alan.customframe.loading.LatteLoader;
 import com.example.alan.customframe.loading.LoaderStyle;
-import com.example.alan.customframe.net.RestCreator;
-import com.example.latten_corn.Latte;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +17,7 @@ public final class RequestCallbacks implements Callback<String> {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final LoaderStyle LOADER_STYLE;
-    private static final Handler HANDLER = Latte.getHandler();
+ //   private static final Handler HANDLER = Latte.getHandler();
 
     public RequestCallbacks(IRequest request, ISuccess success, IFailure failure, IError error, LoaderStyle style) {
         this.REQUEST = request;
@@ -62,15 +57,15 @@ public final class RequestCallbacks implements Callback<String> {
     }
 
     private void onRequestFinish() {
-        final long delayed = Latte.getConfiguration(ConfigKeys.LOADER_DELAYED);
-        if (LOADER_STYLE != null) {
-            HANDLER.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    RestCreator.getParams().clear();
-                    LatteLoader.stopLoading();
-                }
-            }, delayed);
-        }
+//    //    final long delayed = Latte.getConfiguration(ConfigKeys.LOADER_DELAYED);
+//        if (LOADER_STYLE != null) {
+//            HANDLER.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    RestCreator.getParams().clear();
+//                    LatteLoader.stopLoading();
+//                }
+//            }, delayed);
+//        }
     }
 }

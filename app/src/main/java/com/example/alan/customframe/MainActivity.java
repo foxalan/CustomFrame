@@ -27,15 +27,14 @@ public class MainActivity extends ProxyActivity implements ISignCallBack {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
 
-        RestClient.builder().setUrl("about.php")
-
-                .setSuccess(new ISuccess() {
+        RestClient.builder().url("about.php")
+                .success(new ISuccess() {
                     @Override
-                    public void onSuccess(String message) {
+                    public void onSuccess(String response) {
                         Log.e("tang", "success");
                     }
                 })
-                .setFailure(new IFailure() {
+                .failure(new IFailure() {
                     @Override
                     public void onFailure() {
                         Log.e("tang", "onfailure");

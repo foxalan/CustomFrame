@@ -7,10 +7,10 @@ import com.example.alan.customframe.net.callback.IError;
 import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.IRequest;
 import com.example.alan.customframe.net.callback.ISuccess;
-import com.squareup.okhttp.ResponseBody;
 
 import java.util.WeakHashMap;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,15 +51,15 @@ public final class DownloadHandler {
 
     public final void handleDownload() {
         if (REQUEST != null) {
-            REQUEST.onStart();
+            REQUEST.onRequestStart();
         }
 
         RestCreator
-                .getService()
+                .getRestService()
                 .download(URL, PARAMS)
-                .enqueue(new Callback<com.squareup.okhttp.ResponseBody>() {
+                .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<com.squareup.okhttp.ResponseBody> call, Response<com.squareup.okhttp.ResponseBody> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             final ResponseBody responseBody = response.body();
                             final SaveFileTask task = new SaveFileTask(REQUEST, SUCCESS);
@@ -69,7 +69,7 @@ public final class DownloadHandler {
                             //这里一定要注意判断，否则文件下载不全
                             if (task.isCancelled()) {
                                 if (REQUEST != null) {
-                                    REQUEST.onEnd();
+                                    REQUEST.onRequestEnd();
                                 }
                             }
                         } else {
@@ -81,7 +81,7 @@ public final class DownloadHandler {
                     }
 
                     @Override
-                    public void onFailure(Call<com.squareup.okhttp.ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         if (FAILURE != null) {
                             FAILURE.onFailure();
                             RestCreator.getParams().clear();

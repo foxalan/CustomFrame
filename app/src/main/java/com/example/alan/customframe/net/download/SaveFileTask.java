@@ -55,7 +55,7 @@ final class SaveFileTask extends AsyncTask<Object, Void, File> {
             SUCCESS.onSuccess(file.getPath());
         }
         if (REQUEST != null) {
-            REQUEST.onEnd();
+            REQUEST.onRequestEnd();
         }
         autoInstallApk(file);
     }
