@@ -16,6 +16,8 @@ import com.example.alan.customframe.net.callback.IFailure;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.util.LogUtil;
 
+import qiu.niorgai.StatusBarCompat;
+
 /**
  * @author Alan
  */
@@ -46,6 +48,9 @@ public class MainActivity extends ProxyActivity implements ISignCallBack {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+        StatusBarCompat.translucentStatusBar(this, true);
+
     }
 
     @Override

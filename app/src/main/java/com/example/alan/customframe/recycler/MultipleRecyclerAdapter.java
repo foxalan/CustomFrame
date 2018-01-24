@@ -111,7 +111,6 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                     mIsInitBanner = true;
                 }
                 break;
-
             default:
                 break;
         }
