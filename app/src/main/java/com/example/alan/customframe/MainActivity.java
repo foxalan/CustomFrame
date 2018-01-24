@@ -65,4 +65,6 @@ public class MainActivity extends ProxyActivity implements ISignCallBack {
         LogUtil.e("have not sign success");
         start(new LoginDelegate());
     }
+
+
 }
