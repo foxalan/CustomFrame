@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.alan.customframe.R;
+import com.example.alan.customframe.delegate.home.HomeDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
 import com.example.alan.customframe.refresh.RefreshHandler;
 
@@ -63,6 +64,9 @@ public class IndexDelegate extends BaseBottomItemDelegate {
     private void initRecyclerView() {
         final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
+
+        final HomeDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
 //        mRecyclerView.addItemDecoration
 //                (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
 //        final EcBottomDelegate ecBottomDelegate = getParentDelegate();

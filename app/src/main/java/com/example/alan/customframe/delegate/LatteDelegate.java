@@ -5,4 +5,9 @@ package com.example.alan.customframe.delegate;
  */
 
 public abstract  class LatteDelegate extends PermissionCheckDelegate {
+
+    @SuppressWarnings("unchecked")
+    public <T extends LatteDelegate> T getParentDelegate() {
+        return (T) getParentFragment();
+    }
 }
