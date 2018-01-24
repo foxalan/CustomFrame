@@ -78,6 +78,8 @@ dependencies {
     //Banner依赖
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    //JSON依赖Android版
+    compile 'com.alibaba:fastjson:1.1.57.android'
 
 
 }

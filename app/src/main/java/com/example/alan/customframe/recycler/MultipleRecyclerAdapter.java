@@ -66,6 +66,14 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
 
     private boolean mIsInitBanner = false;
 
+    public static MultipleRecyclerAdapter create(List<MultipleItemEntity> data) {
+        return new MultipleRecyclerAdapter(data);
+    }
+
+    public static MultipleRecyclerAdapter create(DataConverter converter) {
+        return new MultipleRecyclerAdapter(converter.convert());
+    }
+
     @Override
     protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
         String text;
@@ -90,7 +98,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                 Glide.with(mContext)
                         .load(imageUrl)
                         .apply(RECYCLER_OPTIONS)
-                        .into((ImageView) helper.getView(R.id.tv_multiple));
+                        .into((ImageView) helper.getView(R.id.img_multiple));
                 break;
             case ItemType.TYPE_SCANNER:
                 /**
@@ -102,6 +110,7 @@ public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleI
                     BannerCreator.setDefault(convenientBanner, bannerImages, this);
                     mIsInitBanner = true;
                 }
+                break;
 
             default:
                 break;
