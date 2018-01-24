@@ -10,4 +10,5 @@ public enum ConfigType {
     APPLICATION_CONTEXT,
     CONFIG_READY,
     ICON,
+    HANDLER,
 }

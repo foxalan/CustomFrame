@@ -1,5 +1,7 @@
 package com.example.latten_corn;
 
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -12,6 +14,7 @@ public class Configurator {
 
     private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     public final HashMap<String, Object> getLatteConfigs() {
         return LATTE_CONFIGS;
@@ -19,6 +22,7 @@ public class Configurator {
 
     public Configurator() {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
+        LATTE_CONFIGS.put(ConfigType.HANDLER.name(), HANDLER);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.example.latten_corn;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -27,6 +28,10 @@ public class Latte {
 
     public static <T> T getConfiguration(Object key) {
         return getConfigurator().getConfiguration((ConfigType) key);
+    }
+
+    public static Handler getHandler() {
+        return getConfiguration(ConfigType.HANDLER);
     }
 
     public static Configurator getConfigurator() {
