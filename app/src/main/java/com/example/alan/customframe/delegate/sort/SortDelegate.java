@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
+import com.example.alan.customframe.delegate.sort.content.ContentDelegate;
 import com.example.alan.customframe.delegate.sort.list.VerticalListDelegate;
 
 /**
@@ -33,5 +34,7 @@ public class SortDelegate extends BaseBottomItemDelegate {
 
         final VerticalListDelegate listDelegate = new VerticalListDelegate();
         getSupportDelegate().loadRootFragment(R.id.vertical_list_container, listDelegate);
+        //设置右侧第一个分类显示，默认显示分类一
+        getSupportDelegate().loadRootFragment(R.id.sort_content_container, ContentDelegate.newInstance(1));
     }
 }

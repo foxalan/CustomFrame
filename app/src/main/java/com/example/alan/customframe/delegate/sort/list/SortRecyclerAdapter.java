@@ -6,7 +6,9 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.example.alan.customframe.R;
+import com.example.alan.customframe.delegate.LatteDelegate;
 import com.example.alan.customframe.delegate.sort.SortDelegate;
+import com.example.alan.customframe.delegate.sort.content.ContentDelegate;
 import com.example.alan.customframe.recycler.ItemType;
 import com.example.alan.customframe.recycler.MultipleFields;
 import com.example.alan.customframe.recycler.MultipleItemEntity;
@@ -14,6 +16,8 @@ import com.example.alan.customframe.recycler.MultipleRecyclerAdapter;
 import com.example.alan.customframe.recycler.MultipleViewHolder;
 
 import java.util.List;
+
+import me.yokeyword.fragmentation.SupportHelper;
 
 /**
  * Created by 傅令杰
@@ -56,7 +60,7 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                             mPrePosition = currentPosition;
 
                             final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
-                        //    showContent(contentId);
+                            showContent(contentId);
                         }
                     }
                 });
@@ -80,16 +84,16 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
         }
     }
 
-//    private void showContent(int contentId) {
-//        final ContentDelegate delegate = ContentDelegate.newInstance(contentId);
-//        switchContent(delegate);
-//    }
-//
-//    private void switchContent(ContentDelegate delegate) {
-//        final LatteDelegate contentDelegate =
-//                SupportHelper.findFragment(DELEGATE.getChildFragmentManager(), ContentDelegate.class);
-//        if (contentDelegate != null) {
-//            contentDelegate.getSupportDelegate().replaceFragment(delegate, false);
-//        }
-//    }
+    private void showContent(int contentId) {
+        final ContentDelegate delegate = ContentDelegate.newInstance(contentId);
+        switchContent(delegate);
+    }
+
+    private void switchContent(ContentDelegate delegate) {
+        final LatteDelegate contentDelegate =
+                SupportHelper.findFragment(DELEGATE.getChildFragmentManager(), ContentDelegate.class);
+        if (contentDelegate != null) {
+            contentDelegate.getSupportDelegate().replaceFragment(delegate, false);
+        }
+    }
 }
