@@ -20,7 +20,6 @@ import butterknife.BindView;
 /**
  * Function :
  * Modify Date : 2018/1/24
- *
  * @Author : Alan
  * Issue : TODO
  * Whether Solve :
