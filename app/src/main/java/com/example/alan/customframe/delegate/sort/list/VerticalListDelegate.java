@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.delegate.sort.SortDelegate;
 import com.example.alan.customframe.net.RestClient;
 import com.example.alan.customframe.net.callback.ISuccess;
+import com.example.alan.customframe.recycler.MultipleItemEntity;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -53,11 +58,12 @@ public class VerticalListDelegate extends LatteDelegate {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        final List<MultipleItemEntity> data =
-//                                new VerticalListDataConverter().setJsonData(response).convert();
-//                        final SortDelegate delegate = getParentDelegate();
-//                        final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data, delegate);
-//                        mRecyclerView.setAdapter(adapter);
+                        Log.e("tang","======"+response);
+                        final List<MultipleItemEntity> data =
+                                new VerticalListDataConverter().setJsonData(response).convert();
+                        final SortDelegate delegate = getParentDelegate();
+                        final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data, delegate);
+                        mRecyclerView.setAdapter(adapter);
                     }
                 })
                 .build()

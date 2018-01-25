@@ -14,5 +14,8 @@ public class ItemType {
     public static final int TYPE_IMAGE = 2;
     public static final int TYPE_TEXT_IMAGE = 3;
     public static final int TYPE_SCANNER = 4;
+    public static final int TYPE_VERTICAL_MENU_LIST=5;
+    public static final int VERTICAL_MENU_LIST = 6;
+    public static final int SINGLE_BIG_IMAGE = 7;
 
 }

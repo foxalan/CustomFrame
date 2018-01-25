@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
+import com.example.alan.customframe.delegate.sort.list.VerticalListDelegate;
 
 /**
  * Function :
@@ -30,5 +31,7 @@ public class SortDelegate extends BaseBottomItemDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
 
+        final VerticalListDelegate listDelegate = new VerticalListDelegate();
+        getSupportDelegate().loadRootFragment(R.id.vertical_list_container, listDelegate);
     }
 }
