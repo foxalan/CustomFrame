@@ -1,10 +1,11 @@
-package com.example.latten_corn.util;
+package com.example.alan.customframe.util;
 
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
+
 
 public class DimenUtil {
 

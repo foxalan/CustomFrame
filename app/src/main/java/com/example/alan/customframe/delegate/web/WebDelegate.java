@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.webkit.WebView;
 
 import com.example.alan.customframe.delegate.LatteDelegate;
+import com.example.alan.customframe.delegate.web.route.RouteKeys;
 import com.example.alan.customframe.latte.ConfigType;
 import com.example.alan.customframe.latte.Latte;
 
@@ -42,6 +43,8 @@ public abstract class WebDelegate extends LatteDelegate implements IWebViewIniti
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // todo init url
+        final Bundle args = getArguments();
+        mUrl = args.getString(RouteKeys.URL.name());
         initWebView();
     }
 

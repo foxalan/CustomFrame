@@ -7,7 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.alan.customframe.R;
-import com.example.latten_corn.util.DimenUtil;
+import com.example.alan.customframe.util.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;

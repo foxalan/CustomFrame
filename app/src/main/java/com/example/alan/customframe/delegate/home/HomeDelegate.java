@@ -1,5 +1,6 @@
 package com.example.alan.customframe.delegate.home;
 
+import com.example.alan.customframe.delegate.discover.DiscoverDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BottomItemBean;
@@ -26,6 +27,7 @@ public class HomeDelegate extends BaseBottomDelegate {
         final LinkedHashMap<BottomItemBean, BaseBottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
         items.put(new BottomItemBean("{fa-sort}", "分类"), new SortDelegate());
+        items.put(new BottomItemBean("{fa-compass}","发现"),new DiscoverDelegate());
         return builder.addItems(items).build();
 
     }
