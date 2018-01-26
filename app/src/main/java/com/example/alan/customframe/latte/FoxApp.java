@@ -1,8 +1,7 @@
-package com.example.alan.customframe.application;
+package com.example.alan.customframe.latte;
 
 import android.app.Application;
 
-import com.example.latten_corn.Latte;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -26,6 +25,7 @@ public class FoxApp extends Application {
         Latte.init(this)
                 .withIconFont(new FontAwesomeModule())
                 .withApiHost(host)
+                .withJavascriptInterface("latte")
                 .configure();
 
         //初始化内存检测包

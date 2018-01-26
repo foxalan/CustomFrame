@@ -1,4 +1,4 @@
-package com.example.latten_corn;
+package com.example.alan.customframe.latte;
 
 import android.content.Context;
 import android.os.Handler;

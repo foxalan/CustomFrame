@@ -1,6 +1,7 @@
-package com.example.latten_corn;
+package com.example.alan.customframe.latte;
 
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -60,9 +61,17 @@ public class Configurator {
         return this;
     }
 
+
+
     //添加字体图标
     public final Configurator withIconFont(IconFontDescriptor iconFont) {
         ICONS.add(iconFont);
+        return this;
+    }
+
+
+    public Configurator withJavascriptInterface(@NonNull String name) {
+        LATTE_CONFIGS.put(ConfigType.JAVASCRIPT_INTERFACE.name(), name);
         return this;
     }
 

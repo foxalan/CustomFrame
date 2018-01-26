@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import com.example.alan.customframe.net.callback.IRequest;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.util.FileUtil;
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
 
 import java.io.File;
 import java.io.InputStream;

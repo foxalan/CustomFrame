@@ -10,7 +10,7 @@ import com.example.alan.customframe.net.RestClient;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.recycler.DataConverter;
 import com.example.alan.customframe.recycler.MultipleRecyclerAdapter;
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
 
 
 

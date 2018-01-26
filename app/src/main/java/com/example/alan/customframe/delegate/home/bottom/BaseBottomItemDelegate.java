@@ -4,7 +4,7 @@ import android.widget.Toast;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.LatteDelegate;
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
 
 
 /**

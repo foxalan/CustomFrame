@@ -1,4 +1,4 @@
-package com.example.latten_corn;
+package com.example.alan.customframe.latte;
 
 /**
  * Created by Alan on 2017/12/8.
@@ -11,4 +11,5 @@ public enum ConfigType {
     CONFIG_READY,
     ICON,
     HANDLER,
+    JAVASCRIPT_INTERFACE,
 }

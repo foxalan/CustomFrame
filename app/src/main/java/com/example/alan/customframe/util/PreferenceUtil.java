@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
-import com.example.latten_corn.ConfigType;
-import com.example.latten_corn.Configurator;
+import com.example.alan.customframe.latte.ConfigType;
+import com.example.alan.customframe.latte.Configurator;
 
 /**
  * Created by hcc on 16/8/4 21:18

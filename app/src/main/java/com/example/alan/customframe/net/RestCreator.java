@@ -1,8 +1,8 @@
 package com.example.alan.customframe.net;
 
 
-import com.example.latten_corn.ConfigType;
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.ConfigType;
+import com.example.alan.customframe.latte.Latte;
 
 import java.util.ArrayList;
 import java.util.WeakHashMap;

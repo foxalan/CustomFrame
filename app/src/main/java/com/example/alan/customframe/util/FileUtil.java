@@ -15,7 +15,7 @@ import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

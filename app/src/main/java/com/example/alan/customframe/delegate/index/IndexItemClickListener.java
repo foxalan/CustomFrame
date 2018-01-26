@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.listener.SimpleClickListener;
 import com.example.alan.customframe.delegate.LatteDelegate;
 import com.example.alan.customframe.recycler.MultipleFields;
 import com.example.alan.customframe.recycler.MultipleItemEntity;
-import com.example.latten_corn.Latte;
+import com.example.alan.customframe.latte.Latte;
 
 
 /**
