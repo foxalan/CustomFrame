@@ -1,12 +1,16 @@
 package com.example.alan.customframe.delegate.cart;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.alan.customframe.R;
+import com.example.alan.customframe.latte.Latte;
 import com.example.alan.customframe.recycler.MultipleFields;
 import com.example.alan.customframe.recycler.MultipleItemEntity;
 import com.example.alan.customframe.recycler.MultipleRecyclerAdapter;
@@ -25,6 +29,16 @@ import java.util.List;
  */
 
 public class ShopCartAdapter extends MultipleRecyclerAdapter {
+    private ISelectedChangeListener iSelectedChangeListener;
+
+    private boolean mIsSelectedAll = true;
+
+    public void setSelectedChangeListener(ISelectedChangeListener iSelectedChangeListener) {
+        this.iSelectedChangeListener = iSelectedChangeListener;
+    }
+
+    private double mTotalPrice = 0.00;
+    private List<MultipleItemEntity> currentItemList;
 
     private static final RequestOptions OPTIONS = new RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -36,16 +50,43 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
      * some initialization data.
      *
      * @param data A new list is created out of this one to avoid mutable list
+     *
+     *
      */
+
+
     public ShopCartAdapter(List<MultipleItemEntity> data) {
         super(data);
+        this.currentItemList = data;
+        //初始化总价
+        for (MultipleItemEntity entity : data) {
+            final double price = entity.getField(ShopCartItemFields.PRICE);
+            final int count = entity.getField(ShopCartItemFields.COUNT);
+            final double total = price * count;
+            mTotalPrice = mTotalPrice + total;
+        }
+
         addItemType(ShopCartItemType.SHOP_CART_ITEM, R.layout.item_shop_cart);
+    }
+
+    private double reComputeTotalPrice(){
+        mTotalPrice = 0.00;
+        for (MultipleItemEntity entity : currentItemList) {
+            if (entity.getField(ShopCartItemFields.IS_SELECTED)){
+
+                final double price = entity.getField(ShopCartItemFields.PRICE);
+                final int count = entity.getField(ShopCartItemFields.COUNT);
+                final double total = price * count;
+                mTotalPrice = mTotalPrice + total;
+            }
+        }
+        return mTotalPrice;
     }
 
 
 
     @Override
-    protected void convert(MultipleViewHolder holder, MultipleItemEntity entity) {
+    protected void convert(MultipleViewHolder holder,final MultipleItemEntity entity) {
         super.convert(holder, entity);
         switch (holder.getItemViewType()) {
             case ShopCartItemType.SHOP_CART_ITEM:
@@ -75,6 +116,53 @@ public class ShopCartAdapter extends MultipleRecyclerAdapter {
                         .load(thumb)
                         .apply(OPTIONS)
                         .into(imgThumb);
+                //获取控件状态，是否被选中
+                //在左侧勾勾渲染之前改变全选与否状态
+                entity.setField(ShopCartItemFields.IS_SELECTED, mIsSelectedAll);
+                final boolean isSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+                //根据数据状态显示左侧勾勾
+                if (isSelected) {
+                    iconIsSelected.setTextColor
+                            (ContextCompat.getColor(Latte.getApplicationContext(), R.color.app_main));
+                } else {
+                    iconIsSelected.setTextColor(Color.GRAY);
+                }
+                //设置点击事件
+
+                //添加左侧勾勾点击事件
+                iconIsSelected.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final boolean currentSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+                        if (currentSelected) {
+                            iconIsSelected.setTextColor(Color.GRAY);
+                            entity.setField(ShopCartItemFields.IS_SELECTED, false);
+                        } else {
+                            iconIsSelected.setTextColor
+                                    (ContextCompat.getColor(Latte.getApplicationContext(), R.color.app_main));
+                            entity.setField(ShopCartItemFields.IS_SELECTED, true);
+                        }
+
+                        if (iSelectedChangeListener!=null){
+                            iSelectedChangeListener.getTotalPrice(reComputeTotalPrice());
+                        }
+                    }
+                });
+
+                iconMinus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                iconPlus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
 
                 break;
             default:

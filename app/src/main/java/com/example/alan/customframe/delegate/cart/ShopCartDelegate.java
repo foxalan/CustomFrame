@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
+import com.example.alan.customframe.latte.Latte;
 import com.example.alan.customframe.net.RestClient;
 import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.recycler.MultipleItemEntity;
@@ -27,7 +28,7 @@ import butterknife.BindView;
  * Whether Solve :
  */
 
-public class ShopCartDelegate extends BaseBottomItemDelegate {
+public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelectedChangeListener {
 
     @BindView(R.id.tv_top_shop_cart_clear)
     AppCompatTextView mTextViewClear;
@@ -37,6 +38,8 @@ public class ShopCartDelegate extends BaseBottomItemDelegate {
     IconTextView mTextViewSelectAll;
     @BindView(R.id.tv_shop_cart_pay)
     AppCompatTextView mTextViewPay;
+    @BindView(R.id.tv_shop_cart_total_price)
+    AppCompatTextView mTextViewTotalPrice;
     @BindView(R.id.ryc_cart)
     RecyclerView mRecyclerView;
 
@@ -84,10 +87,21 @@ public class ShopCartDelegate extends BaseBottomItemDelegate {
                         .setJsonData(response)
                         .convert();
         mAdapter = new ShopCartAdapter(data);
-
+        mAdapter.setSelectedChangeListener(this);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
 
+
+    }
+
+    @Override
+    public void getTotalPrice(final double totalPrice) {
+        Latte.getHandler().post(new Runnable() {
+            @Override
+            public void run() {
+                mTextViewTotalPrice.setText(String.valueOf(totalPrice));
+            }
+        });
     }
 }
