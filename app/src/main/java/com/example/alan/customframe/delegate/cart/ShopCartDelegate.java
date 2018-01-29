@@ -1,11 +1,12 @@
 package com.example.alan.customframe.delegate.cart;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
@@ -18,6 +19,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Function :
@@ -43,6 +45,26 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
     @BindView(R.id.ryc_cart)
     RecyclerView mRecyclerView;
 
+    @OnClick(R.id.icon_shop_cart_select_all)
+    void onClickSelectAll() {
+        final int tag = (int) mTextViewSelectAll.getTag();
+        if (tag == 0) {
+            mTextViewSelectAll.setTextColor
+                    (ContextCompat.getColor(getContext(), R.color.app_main));
+            mTextViewSelectAll.setTag(1);
+            mAdapter.setIsSelectedAll(true);
+            //更新RecyclerView的显示状态
+            mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount());
+            mTextViewTotalPrice.setText(String.valueOf(mTotalPrice));
+        } else {
+            mTextViewSelectAll.setTextColor(Color.GRAY);
+            mTextViewSelectAll.setTag(0);
+            mAdapter.setIsSelectedAll(false);
+            mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount());
+            mTextViewTotalPrice.setText(String.valueOf(0.00));
+        }
+    }
+
     private ShopCartAdapter mAdapter = null;
 
     private int mCurrentCount = 0;
@@ -56,7 +78,7 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
 
     @Override
     public void onBindView() {
-
+        mTextViewSelectAll.setTag(1);
     }
 
     /**
@@ -73,7 +95,7 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.e("tang","response"+response);
+                       
                         initData(response);
                     }
                 })
@@ -89,10 +111,12 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
         mAdapter = new ShopCartAdapter(data);
         mAdapter.setSelectedChangeListener(this);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        mTotalPrice = mAdapter.getTotalPrice();
+        mTextViewTotalPrice.setText(String.valueOf(mAdapter.getTotalPrice()));
+        mTextViewSelectAll.setTextColor
+                (ContextCompat.getColor(getContext(), R.color.app_main));
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
-
-
     }
 
     @Override
@@ -103,5 +127,15 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
                 mTextViewTotalPrice.setText(String.valueOf(totalPrice));
             }
         });
+    }
+
+    @Override
+    public void getLeftCheck(boolean isAllCheck) {
+        if (isAllCheck){
+            mTextViewSelectAll.setTextColor
+                    (ContextCompat.getColor(getContext(), R.color.app_main));
+        }else {
+            mTextViewSelectAll.setTextColor(Color.GRAY);
+        }
     }
 }

@@ -11,4 +11,6 @@ package com.example.alan.customframe.delegate.cart;
 
 public interface ISelectedChangeListener {
     void getTotalPrice(double totalPrice);
+
+    void getLeftCheck(boolean isCheck);
 }
