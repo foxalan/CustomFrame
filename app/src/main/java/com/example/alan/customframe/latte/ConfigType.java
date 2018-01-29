@@ -12,4 +12,5 @@ public enum ConfigType {
     ICON,
     HANDLER,
     JAVASCRIPT_INTERFACE,
+    LOADER_DELAYED,
 }

@@ -75,6 +75,11 @@ public class Configurator {
         return this;
     }
 
+    public Configurator withLoaderTime(int time){
+        LATTE_CONFIGS.put(ConfigType.LOADER_DELAYED.name(),time);
+        return this;
+    }
+
 
     private void checkConfiguration() {
         final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigType.CONFIG_READY.name());
