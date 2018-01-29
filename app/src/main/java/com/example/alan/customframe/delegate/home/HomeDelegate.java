@@ -1,5 +1,6 @@
 package com.example.alan.customframe.delegate.home;
 
+import com.example.alan.customframe.delegate.cart.ShopCartDelegate;
 import com.example.alan.customframe.delegate.discover.DiscoverDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
@@ -28,6 +29,7 @@ public class HomeDelegate extends BaseBottomDelegate {
         items.put(new BottomItemBean("{fa-home}", "主页"), new IndexDelegate());
         items.put(new BottomItemBean("{fa-sort}", "分类"), new SortDelegate());
         items.put(new BottomItemBean("{fa-compass}","发现"),new DiscoverDelegate());
+        items.put(new BottomItemBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
         return builder.addItems(items).build();
 
     }

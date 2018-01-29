@@ -1,5 +1,6 @@
 package com.example.alan.customframe.delegate.web;
 
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.alibaba.fastjson.JSON;
@@ -27,6 +28,7 @@ final class LatteWebInterface {
         final String action = JSON.parseObject(params).getString("action");
         final Event event = EventManager.getInstance().createEvent(action);
 //        LatteLogger.d("WEB_EVENT",params);
+        Log.e("tang","click");
         if (event != null) {
             event.setAction(action);
             event.setDelegate(DELEGATE);
