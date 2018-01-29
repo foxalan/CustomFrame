@@ -42,7 +42,7 @@ public class CartDataConverter extends DataConverter{
                     .setField(ShopCartItemFields.DESC, desc)
                     .setField(ShopCartItemFields.COUNT, count)
                     .setField(ShopCartItemFields.PRICE, price)
-                    .setField(ShopCartItemFields.IS_SELECTED, false)
+                    .setField(ShopCartItemFields.IS_SELECTED, true)
                     .setField(ShopCartItemFields.POSITION, i)
                     .build();
 

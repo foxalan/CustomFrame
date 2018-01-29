@@ -5,8 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ViewStubCompat;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
@@ -17,6 +22,7 @@ import com.example.alan.customframe.recycler.MultipleItemEntity;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,6 +50,11 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
     AppCompatTextView mTextViewTotalPrice;
     @BindView(R.id.ryc_cart)
     RecyclerView mRecyclerView;
+    @BindView(R.id.stub_no_item)
+    ViewStubCompat mStubNoItem = null;
+    @BindView(R.id.ll_money_pay)
+    LinearLayoutCompat mLinearLayout;
+
 
     @OnClick(R.id.icon_shop_cart_select_all)
     void onClickSelectAll() {
@@ -55,13 +66,62 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
             mAdapter.setIsSelectedAll(true);
             //更新RecyclerView的显示状态
             mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount());
-            mTextViewTotalPrice.setText(String.valueOf(mTotalPrice));
+            for (MultipleItemEntity entity : mAdapter.getData()) {
+                entity.setField(ShopCartItemFields.IS_SELECTED, true);
+            }
         } else {
             mTextViewSelectAll.setTextColor(Color.GRAY);
             mTextViewSelectAll.setTag(0);
             mAdapter.setIsSelectedAll(false);
             mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount());
-            mTextViewTotalPrice.setText(String.valueOf(0.00));
+
+            for (MultipleItemEntity entity : mAdapter.getData()) {
+                entity.setField(ShopCartItemFields.IS_SELECTED, false);
+            }
+
+        }
+
+        mTextViewTotalPrice.setText(String.valueOf(getTotalPrice()));
+
+    }
+
+    @OnClick({R.id.tv_top_shop_cart_clear, R.id.tv_top_shop_cart_remove_selected})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_top_shop_cart_clear:
+                if (mAdapter.getData().size()!=0){
+
+                    mAdapter.getData().clear();
+                    mAdapter.notifyDataSetChanged();
+                    mTextViewTotalPrice.setText(String.valueOf(0.00));
+                    checkItemCount();
+                }
+                break;
+            case R.id.tv_top_shop_cart_remove_selected:
+                //todo
+                final List<MultipleItemEntity> data = mAdapter.getData();
+                //要删除的数据
+                final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
+                for (MultipleItemEntity entity : data) {
+                    final boolean isSelected = entity.getField(ShopCartItemFields.IS_SELECTED);
+                    if (isSelected) {
+                        deleteEntities.add(entity);
+                    }
+                }
+
+                for (int i = (deleteEntities.size() - 1);i >= 0; i--) {
+                    MultipleItemEntity entity = deleteEntities.get(i);
+                    int removePosition = i;
+                    final int entityPosition = entity.getField(ShopCartItemFields.POSITION);
+                    mAdapter.remove(removePosition);
+                }
+
+                mAdapter.notifyDataSetChanged();
+                checkItemCount();
+                mTextViewTotalPrice.setText(String.valueOf(getTotalPrice()));
+                break;
+            default:
+                break;
         }
     }
 
@@ -83,6 +143,7 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
 
     /**
      * 初始化购物车要的数据
+     *
      * @param savedInstanceState
      */
     @Override
@@ -95,7 +156,6 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                       
                         initData(response);
                     }
                 })
@@ -121,6 +181,7 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
 
     @Override
     public void getTotalPrice(final double totalPrice) {
+        mTotalPrice = totalPrice;
         Latte.getHandler().post(new Runnable() {
             @Override
             public void run() {
@@ -131,11 +192,52 @@ public class ShopCartDelegate extends BaseBottomItemDelegate implements ISelecte
 
     @Override
     public void getLeftCheck(boolean isAllCheck) {
-        if (isAllCheck){
+        if (isAllCheck) {
             mTextViewSelectAll.setTextColor
                     (ContextCompat.getColor(getContext(), R.color.app_main));
-        }else {
+        } else {
             mTextViewSelectAll.setTextColor(Color.GRAY);
         }
+    }
+
+    @SuppressWarnings("RestrictedApi")
+    private void checkItemCount() {
+        final int count = mAdapter.getItemCount();
+        if (count == 0) {
+            final View stubView = mStubNoItem.inflate();
+            final AppCompatTextView tvToBuy =
+                    (AppCompatTextView) stubView.findViewById(R.id.tv_stub_to_buy);
+            tvToBuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "你该购物啦！", Toast.LENGTH_SHORT).show();
+                }
+            });
+            mRecyclerView.setVisibility(View.GONE);
+            mLinearLayout.setVisibility(View.GONE);
+        } else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mLinearLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private double getTotalPrice() {
+
+        double currentPrice = 0;
+        for (MultipleItemEntity entity : mAdapter.getData()) {
+            if (entity.getField(ShopCartItemFields.IS_SELECTED)) {
+
+                final double price = entity.getField(ShopCartItemFields.PRICE);
+                final int count = entity.getField(ShopCartItemFields.COUNT);
+                final double total = price * count;
+                Log.e("tang", price + "=====" + count);
+                currentPrice = currentPrice + total;
+                Log.e("tang", price + "===" + count);
+            }
+        }
+
+        mTotalPrice = currentPrice;
+
+        return mTotalPrice;
     }
 }
