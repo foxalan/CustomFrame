@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
+import com.example.alan.customframe.delegate.personal.address.AddressDelegate;
 import com.example.alan.customframe.delegate.personal.list.ListAdapter;
 import com.example.alan.customframe.delegate.personal.list.ListBean;
 import com.example.alan.customframe.delegate.personal.list.ListItemType;
@@ -71,11 +72,13 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
                 .setId(1)
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setText("收货地址")
+                .setDelegate(new AddressDelegate())
                 .build();
 
         ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
+
                 .setText("系统设置")
                 .build();
 
@@ -92,5 +95,6 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.addOnItemTouchListener(new PersonalClickListener(this));
     }
 }
