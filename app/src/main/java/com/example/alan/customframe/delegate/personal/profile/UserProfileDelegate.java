@@ -51,21 +51,21 @@ public class UserProfileDelegate extends LatteDelegate {
                 .build();
 
         final ListBean name = new ListBean.Builder()
-                .setItemType(ListItemType.ITEM_NORMAL)
+                .setItemType(ListItemType.ITEM_AVATAR)
                 .setId(2)
                 .setText("姓名")
                 .setValue("未设置姓名")
                 .build();
 
         final ListBean gender = new ListBean.Builder()
-                .setItemType(ListItemType.ITEM_NORMAL)
+                .setItemType(ListItemType.ITEM_AVATAR)
                 .setId(3)
                 .setText("性别")
                 .setValue("未设置性别")
                 .build();
 
         final ListBean birth = new ListBean.Builder()
-                .setItemType(ListItemType.ITEM_NORMAL)
+                .setItemType(ListItemType.ITEM_AVATAR)
                 .setId(4)
                 .setText("生日")
                 .setValue("未设置生日")
@@ -84,6 +84,6 @@ public class UserProfileDelegate extends LatteDelegate {
         mRecyclerView.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRecyclerView.setAdapter(adapter);
-    //   mRecyclerView.addOnItemTouchListener(new UserProfileClickListener(this));
+       mRecyclerView.addOnItemTouchListener(new UserProfileClickListener(this));
     }
 }
