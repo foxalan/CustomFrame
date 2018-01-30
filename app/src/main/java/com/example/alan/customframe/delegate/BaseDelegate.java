@@ -14,6 +14,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 abstract class BaseDelegate extends SwipeBackFragment {
 
+
     /**
      * 得到布局
      * @return

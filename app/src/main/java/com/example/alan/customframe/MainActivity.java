@@ -3,7 +3,6 @@ package com.example.alan.customframe;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 
 import com.example.alan.customframe.activity.ProxyActivity;
 import com.example.alan.customframe.delegate.LatteDelegate;
@@ -11,9 +10,6 @@ import com.example.alan.customframe.delegate.TestDelegate;
 import com.example.alan.customframe.delegate.home.HomeDelegate;
 import com.example.alan.customframe.delegate.sign.LoginDelegate;
 import com.example.alan.customframe.login.ISignCallBack;
-import com.example.alan.customframe.net.RestClient;
-import com.example.alan.customframe.net.callback.IFailure;
-import com.example.alan.customframe.net.callback.ISuccess;
 import com.example.alan.customframe.util.LogUtil;
 
 import qiu.niorgai.StatusBarCompat;
@@ -29,26 +25,11 @@ public class MainActivity extends ProxyActivity implements ISignCallBack {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
 
-        RestClient.builder().url("about.php")
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        Log.e("tang", "success");
-                    }
-                })
-                .failure(new IFailure() {
-                    @Override
-                    public void onFailure() {
-                        Log.e("tang", "onfailure");
-                    }
-                })
-                .build()
-                .get();
-
         if (actionBar != null) {
             actionBar.hide();
         }
 
+        //设置android沉浸式状态栏功能
         StatusBarCompat.translucentStatusBar(this, true);
 
     }

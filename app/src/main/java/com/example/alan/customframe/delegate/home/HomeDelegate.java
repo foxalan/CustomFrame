@@ -7,6 +7,7 @@ import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
 import com.example.alan.customframe.delegate.home.bottom.BottomItemBean;
 import com.example.alan.customframe.delegate.home.bottom.ItemBuilder;
 import com.example.alan.customframe.delegate.index.IndexDelegate;
+import com.example.alan.customframe.delegate.personal.PersonalDelegate;
 import com.example.alan.customframe.delegate.sort.SortDelegate;
 
 import java.util.LinkedHashMap;
@@ -30,6 +31,8 @@ public class HomeDelegate extends BaseBottomDelegate {
         items.put(new BottomItemBean("{fa-sort}", "分类"), new SortDelegate());
         items.put(new BottomItemBean("{fa-compass}","发现"),new DiscoverDelegate());
         items.put(new BottomItemBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
+        items.put(new BottomItemBean("{fa-user}", "我的"), new PersonalDelegate());
+
         return builder.addItems(items).build();
 
     }
