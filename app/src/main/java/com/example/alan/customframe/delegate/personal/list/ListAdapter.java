@@ -29,6 +29,7 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
 
         addItemType(ListItemType.ITEM_NORMAL, R.layout.item_list_normal);
         addItemType(ListItemType.ITEM_AVATAR, R.layout.item_list_avatar);
+        addItemType(ListItemType.ITEM_SWITCH, R.layout.item_list_switch);
     }
 
     @Override
@@ -40,8 +41,17 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
                 mTextViewContent.setText(mContent);
                 break;
             case ListItemType.ITEM_AVATAR:
+                AppCompatTextView mAvatarContent = holder.getView(R.id.list_item_avatar_content);
+                AppCompatTextView mAvatarValue = holder.getView(R.id.list_item_avatar_value);
+                String mContentAvatar = item.getContent();
+                String mContentValue = item.getBranch();
+                mAvatarContent.setText(mContentAvatar);
+                mAvatarValue.setText(mContentValue);
+                break;
+            case ListItemType.ITEM_SWITCH:
 
                 break;
+
             default:
                 break;
         }

@@ -61,7 +61,7 @@ public class ListBean implements MultiItemEntity {
         return mItemType;
     }
 
-    static class Builder {
+   public static class Builder {
 
         private int id = 0;
         private int itemType = 0;
