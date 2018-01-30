@@ -4,7 +4,7 @@
     android:layout_height="60dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_arrow_avatar"
+        android:id="@+id/img_arrow_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -13,9 +13,8 @@
 
     <com.joanzapata.iconify.widget.IconTextView
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:text="{fa-chevron-right}"
-        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:layout_margin="15dp"
         android:layout_width="wrap_content"

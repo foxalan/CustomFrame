@@ -7,8 +7,6 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:textSize="15sp"
-        android:text="AABB"
-        android:textColor="@color/colorPrimary"
         android:layout_alignParentStart="true"
         android:id="@+id/list_item_normal_content"
         android:layout_margin="12dp"
@@ -18,7 +16,6 @@
     <com.joanzapata.iconify.widget.IconTextView
         android:textSize="15sp"
         android:text="{fa-chevron-right}"
-        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true"
         android:layout_margin="12dp"
         android:layout_width="wrap_content"

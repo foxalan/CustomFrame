@@ -1,7 +1,11 @@
 package com.example.alan.customframe.delegate.personal.list;
 
 import android.support.v7.widget.AppCompatTextView;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.alan.customframe.R;
@@ -29,8 +33,14 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
 
         addItemType(ListItemType.ITEM_NORMAL, R.layout.item_list_normal);
         addItemType(ListItemType.ITEM_AVATAR, R.layout.item_list_avatar);
-        addItemType(ListItemType.ITEM_SWITCH, R.layout.item_list_switch);
+        addItemType(ListItemType.ITEM_IMAGE, R.layout.item_list_image);
+
     }
+
+    private static final RequestOptions OPTIONS = new RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .dontAnimate()
+            .centerCrop();
 
     @Override
     protected void convert(BaseViewHolder holder, ListBean item) {
@@ -48,10 +58,13 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
                 mAvatarContent.setText(mContentAvatar);
                 mAvatarValue.setText(mContentValue);
                 break;
-            case ListItemType.ITEM_SWITCH:
-
+            case ListItemType.ITEM_IMAGE:
+                String mUrl = item.getUrl();
+                Glide.with(mContext)
+                        .load(mUrl)
+                        .apply(OPTIONS)
+                        .into((ImageView) holder.getView(R.id.img_arrow_image));
                 break;
-
             default:
                 break;
         }

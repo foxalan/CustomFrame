@@ -2,17 +2,22 @@ package com.example.alan.customframe.delegate.personal;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.alan.customframe.R;
 import com.example.alan.customframe.delegate.home.bottom.BaseBottomItemDelegate;
 import com.example.alan.customframe.delegate.personal.list.ListAdapter;
 import com.example.alan.customframe.delegate.personal.list.ListBean;
 import com.example.alan.customframe.delegate.personal.list.ListItemType;
+import com.example.alan.customframe.delegate.personal.profile.UserProfileDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Function :
@@ -27,7 +32,26 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
 
     @BindView(R.id.rv_personal_setting)
     RecyclerView mRecyclerView;
-    List<ListBean> data;
+    @BindView(R.id.tv_all_order)
+    TextView mTextAllOrder;
+    @BindView(R.id.img_user_avatar)
+    CircleImageView mCircleImageView;
+
+    @OnClick({R.id.tv_all_order, R.id.img_user_avatar})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_all_order:
+
+                break;
+            case R.id.img_user_avatar:
+                getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private List<ListBean> data;
 
 
     @Override
