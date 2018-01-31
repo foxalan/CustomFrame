@@ -1,5 +1,7 @@
 package com.example.alan.customframe.delegate.personal;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +13,7 @@ import com.example.alan.customframe.delegate.personal.address.AddressDelegate;
 import com.example.alan.customframe.delegate.personal.list.ListAdapter;
 import com.example.alan.customframe.delegate.personal.list.ListBean;
 import com.example.alan.customframe.delegate.personal.list.ListItemType;
+import com.example.alan.customframe.delegate.personal.order.OrderListDelegate;
 import com.example.alan.customframe.delegate.personal.profile.UserProfileDelegate;
 import com.example.alan.customframe.delegate.personal.setting.SettingDelegate;
 
@@ -39,11 +42,15 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
     @BindView(R.id.img_user_avatar)
     CircleImageView mCircleImageView;
 
+    public static final String ORDER_TYPE = "ORDER_TYPE";
+    private Bundle mArgs = null;
+
     @OnClick({R.id.tv_all_order, R.id.img_user_avatar})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_all_order:
-
+                mArgs.putString(ORDER_TYPE, "all");
+                startOrderListByType();
                 break;
             case R.id.img_user_avatar:
                 getParentDelegate().getSupportDelegate().start(new UserProfileDelegate());
@@ -53,8 +60,20 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
         }
     }
 
+    private void startOrderListByType() {
+        final OrderListDelegate delegate = new OrderListDelegate();
+        delegate.setArguments(mArgs);
+        getParentDelegate().getSupportDelegate().start(delegate);
+    }
+
+
     private List<ListBean> data;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mArgs = new Bundle();
+    }
 
     @Override
     public Object getLayout() {
