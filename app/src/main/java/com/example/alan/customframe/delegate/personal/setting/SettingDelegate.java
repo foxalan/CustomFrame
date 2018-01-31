@@ -54,11 +54,11 @@ public class SettingDelegate extends LatteDelegate {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            CallbackManager.getInstance().getCallback(CallbackType.TAG_OPEN_PUSH).executeCallback(null);
+                        //    CallbackManager.getInstance().getCallback(CallbackType.TAG_OPEN_PUSH).executeCallback(null);
                             Toast.makeText(getContext(), "打开推送", Toast.LENGTH_SHORT).show();
                         } else {
                             CallbackManager.getInstance().getCallback(CallbackType.TAG_STOP_PUSH).executeCallback(null);
-                            Toast.makeText(getContext(), "关闭推送", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(getContext(), "关闭推送", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -68,7 +68,7 @@ public class SettingDelegate extends LatteDelegate {
         final ListBean about = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
-//                .setDelegate(new AboutDelegate())
+                .setDelegate(new AboutDelegate())
                 .setText("关于")
                 .build();
 
@@ -81,6 +81,6 @@ public class SettingDelegate extends LatteDelegate {
         mRecyclerView.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRecyclerView.setAdapter(adapter);
-    //    mRecyclerView.addOnItemTouchListener(new SettingsClickListener(this));
+        mRecyclerView.addOnItemTouchListener(new SettingsClickListener(this));
     }
 }
