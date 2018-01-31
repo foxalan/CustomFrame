@@ -8,6 +8,7 @@ import com.example.alan.customframe.delegate.LatteDelegate;
 import com.example.alan.customframe.delegate.personal.list.ListAdapter;
 import com.example.alan.customframe.delegate.personal.list.ListBean;
 import com.example.alan.customframe.delegate.personal.list.ListItemType;
+import com.example.alan.customframe.delegate.personal.setting.NameDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,7 @@ public class UserProfileDelegate extends LatteDelegate {
         final ListBean name = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_AVATAR)
                 .setId(2)
+                .setDelegate(new NameDelegate())
                 .setText("姓名")
                 .setValue("未设置姓名")
                 .build();
@@ -84,6 +86,6 @@ public class UserProfileDelegate extends LatteDelegate {
         mRecyclerView.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRecyclerView.setAdapter(adapter);
-       mRecyclerView.addOnItemTouchListener(new UserProfileClickListener(this));
+        mRecyclerView.addOnItemTouchListener(new UserProfileClickListener(this));
     }
 }
