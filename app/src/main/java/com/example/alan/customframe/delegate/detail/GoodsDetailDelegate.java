@@ -1,8 +1,12 @@
 package com.example.alan.customframe.delegate.detail;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.ContentFrameLayout;
@@ -39,9 +43,11 @@ public class GoodsDetailDelegate extends LatteDelegate {
     @BindView(R.id.frame_goods_info)
     ContentFrameLayout mFrameLayout;
     @BindView(R.id.tab_layout)
-    TabLayout mTableLayout;
+    TabLayout mTabLayout;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
+    @BindView(R.id.collapsing_toolbar_detail)
+    CollapsingToolbarLayout mCollapsingToolbarLayout = null;
 
 
     private static final String ARG_GOODS_ID = "ARG_GOODS_ID";
@@ -71,9 +77,14 @@ public class GoodsDetailDelegate extends LatteDelegate {
 
     @Override
     public void onBindView() {
-
+        initViews();
         initData();
+        initTabLayout();
+    }
 
+    private void initViews() {
+        //保证到最上面没有其实View
+        mCollapsingToolbarLayout.setContentScrimColor(Color.WHITE);
     }
 
     private void initData() {
@@ -128,9 +139,13 @@ public class GoodsDetailDelegate extends LatteDelegate {
         mViewPager.setAdapter(adapter);
     }
 
+    private void initTabLayout() {
 
-
-
-
-
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setSelectedTabIndicatorColor
+                (ContextCompat.getColor(getContext(), R.color.app_main));
+        mTabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
+        mTabLayout.setBackgroundColor(Color.WHITE);
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
 }
