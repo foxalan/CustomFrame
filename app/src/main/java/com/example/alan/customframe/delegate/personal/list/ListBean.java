@@ -22,16 +22,18 @@ public class ListBean implements MultiItemEntity {
     private String mUrl;
     private int mItemType;
     private LatteDelegate mDelegate = null;
+    private CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener = null;
 
-
-
-    public ListBean(int mId, String mContent, String mBranch, String mUrl, int mItemType, LatteDelegate mDelegate) {
+    public ListBean(int mId, String mContent, String mBranch, String mUrl,
+                    int mItemType, LatteDelegate mDelegate,
+                    CompoundButton.OnCheckedChangeListener mOnCheckedChangeListener) {
         this.mId = mId;
         this.mContent = mContent;
         this.mBranch = mBranch;
         this.mUrl = mUrl;
         this.mItemType = mItemType;
         this.mDelegate = mDelegate;
+        this.mOnCheckedChangeListener = mOnCheckedChangeListener;
     }
 
     public int getId() {
@@ -61,7 +63,12 @@ public class ListBean implements MultiItemEntity {
         return mItemType;
     }
 
-   public static class Builder {
+
+    public CompoundButton.OnCheckedChangeListener getOnCheckedChangeListener() {
+        return mOnCheckedChangeListener;
+    }
+
+    public static class Builder {
 
         private int id = 0;
         private int itemType = 0;
@@ -107,7 +114,7 @@ public class ListBean implements MultiItemEntity {
         }
 
         public ListBean build() {
-            return new ListBean(id, text, value, imageUrl, itemType, delegate);
+            return new ListBean(id, text, value, imageUrl, itemType, delegate,onCheckedChangeListener);
         }
 
     }

@@ -1,6 +1,7 @@
 package com.example.alan.customframe.delegate.personal.list;
 
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +35,7 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
         addItemType(ListItemType.ITEM_NORMAL, R.layout.item_list_normal);
         addItemType(ListItemType.ITEM_AVATAR, R.layout.item_list_avatar);
         addItemType(ListItemType.ITEM_IMAGE, R.layout.item_list_image);
+        addItemType(ListItemType.ITEM_SWITCH, R.layout.arrow_switch_layout);
 
     }
 
@@ -65,6 +67,11 @@ public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHol
                         .apply(OPTIONS)
                         .into((ImageView) holder.getView(R.id.img_arrow_image));
                 break;
+            case ListItemType.ITEM_SWITCH:
+                holder.setText(R.id.tv_arrow_switch_text, item.getContent());
+                final SwitchCompat switchCompat = holder.getView(R.id.list_item_switch);
+                switchCompat.setChecked(true);
+                switchCompat.setOnCheckedChangeListener(item.getOnCheckedChangeListener());
             default:
                 break;
         }

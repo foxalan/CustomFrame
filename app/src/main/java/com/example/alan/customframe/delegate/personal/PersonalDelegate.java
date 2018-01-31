@@ -12,6 +12,7 @@ import com.example.alan.customframe.delegate.personal.list.ListAdapter;
 import com.example.alan.customframe.delegate.personal.list.ListBean;
 import com.example.alan.customframe.delegate.personal.list.ListItemType;
 import com.example.alan.customframe.delegate.personal.profile.UserProfileDelegate;
+import com.example.alan.customframe.delegate.personal.setting.SettingDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class PersonalDelegate extends BaseBottomItemDelegate {
         ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
-
+                .setDelegate(new SettingDelegate())
                 .setText("系统设置")
                 .build();
 
