@@ -64,19 +64,19 @@
             android:text="购物车"
             android:textSize="12sp" />
 
-        <com.flj.latte.ui.widget.CircleTextView
-            android:id="@+id/tv_shopping_cart_amount"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignEnd="@+id/icon_shop_cart"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/icon_shop_cart"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            tools:ignore="RtlHardcoded" />
+        <!--<com.flj.latte.ui.widget.CircleTextView-->
+            <!--android:id="@+id/tv_shopping_cart_amount"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_alignEnd="@+id/icon_shop_cart"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignRight="@+id/icon_shop_cart"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="12sp"-->
+            <!--tools:ignore="RtlHardcoded" />-->
 
     </RelativeLayout>
 
